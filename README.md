@@ -2,7 +2,7 @@
 
 Bản này tập trung vào một việc chính:
 
-- nhận đầu vào UAP (`.jsonl`, `.zip`, hoặc thư mục batch)
+- nhận đầu vào UAP (Hỗ trợ cả `.jsonl`, `.zip`, hoặc thư mục batch)
 - chạy full pipeline intelligence
 - ghi đầu ra ổn định ra `var/` để team khác có thể wrap thành service
 
@@ -27,4 +27,10 @@ python -m alembic upgrade head
 Invoke-WebRequest
   -Uri "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz"
   -OutFile ".\var\data\models\lid.176.ftz"
+```
+
+## Chạy pipeline
+
+```
+smap run-pipeline .\path\to\input.zip --domain-ontology .\configs\domains\facial_cleanser_vn.yaml --output-json .\var\data\reports\pipeline_result.json
 ```
