@@ -1,0 +1,1685 @@
+metadata:
+  name: facial-cleanser-vn
+  version: 2026.03.23-synthetic
+  description: Vietnam facial cleanser domain ontology with domain-native entities,
+    topics, aspects, and issues for canonical social-listening runs.
+entity_types:
+- brand
+- product
+- product_line
+- category
+- feature
+- issue
+- benefit
+- campaign
+- retailer
+- influencer
+- organization
+- person
+- location
+- facility
+- concept
+taxonomy_nodes:
+- id: category.consumer_goods
+  label: Consumer Goods
+  node_type: category
+- id: category.beauty_cosmetics
+  label: Beauty and Cosmetics
+  node_type: category
+aspect_categories:
+- id: cleansing_power
+  label: Cleansing Power
+  description: Perceived ability to clean dirt, sunscreen, and oil without residue.
+  seed_phrases:
+  - sạch
+  - clean
+  - làm sạch
+  - sạch sâu
+  - rửa sạch
+  - clean finish
+  - residue free
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  linked_topic_keys:
+  - cleanser_brand_comparison
+  - oily_acne_cleansers
+  - cleanser_recommendation_by_skin_type
+  related_issue_ids:
+  - residue_rinse_problem
+  related_aspect_ids: []
+  metadata: {}
+- id: hydration
+  label: Hydration and Soft Finish
+  description: Discussion of moisture retention, softness, and non-stripping finish.
+  seed_phrases:
+  - ẩm
+  - dưỡng ẩm
+  - mềm da
+  - không khô
+  - không căng
+  - hydrating
+  - soft finish
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  linked_topic_keys:
+  - gentle_hydrating_cleansers
+  - cleanser_recommendation_by_skin_type
+  related_issue_ids:
+  - dryness_tightness_problem
+  related_aspect_ids: []
+  metadata: {}
+- id: oil_control
+  label: Oil Control
+  description: Discussion of reducing oiliness, shine, and greasy feel.
+  seed_phrases:
+  - kiềm dầu
+  - giảm dầu
+  - oil control
+  - sạch dầu
+  - bớt đổ dầu
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - oily_acne_cleansers
+  - cleanser_brand_comparison
+  related_issue_ids:
+  - overdrying_after_oil_control
+  related_aspect_ids: []
+  metadata: {}
+- id: acne_support
+  label: Acne-prone Skin Support
+  description: Discussion of breakout management, pore congestion, and acne routines.
+  seed_phrases:
+  - mụn
+  - mụn ẩn
+  - acne
+  - bít tắc
+  - lỗ chân lông
+  - clogged pores
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - oily_acne_cleansers
+  - cleanser_recommendation_by_skin_type
+  related_issue_ids:
+  - breakout_after_use
+  - irritation_redness
+  related_aspect_ids: []
+  metadata: {}
+- id: foam_texture
+  label: Foam and Texture
+  description: Discussion of foam density, gel/cream feel, and rinse experience.
+  seed_phrases:
+  - bọt
+  - tạo bọt
+  - foam
+  - texture
+  - gel
+  - cream
+  - mịn bọt
+  - bọt dày
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  linked_topic_keys:
+  - cleanser_texture_foam_scent
+  - cleanser_brand_comparison
+  related_issue_ids:
+  - residue_rinse_problem
+  related_aspect_ids: []
+  metadata: {}
+- id: fragrance_scent
+  label: Fragrance and Scent
+  description: Discussion of fragrance intensity, fragrance-free positioning, and
+    scent preference.
+  seed_phrases:
+  - mùi
+  - hương liệu
+  - fragrance
+  - thơm
+  - nồng mùi
+  - không mùi
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  linked_topic_keys:
+  - cleanser_texture_foam_scent
+  - gentle_hydrating_cleansers
+  related_issue_ids:
+  - strong_fragrance_complaint
+  - irritation_redness
+  related_aspect_ids: []
+  metadata: {}
+- id: price_value
+  label: Price and Value
+  description: Discussion of price, discount, refill value, and worthiness.
+  seed_phrases:
+  - giá
+  - price
+  - rẻ
+  - đắt
+  - sale
+  - value
+  - đáng tiền
+  - deal
+  - bill
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_price_value_and_promo
+  - cleanser_brand_comparison
+  related_issue_ids:
+  - overpriced_concern
+  - fake_authenticity_concern
+  related_aspect_ids: []
+  metadata: {}
+- id: packaging
+  label: Packaging and Size
+  description: Discussion of pump, tube, travel size, leaks, and packaging changes.
+  seed_phrases:
+  - bao bì
+  - tuýp
+  - pump
+  - nắp
+  - size
+  - travel size
+  - leak
+  - đổi bao bì
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_formula_and_packaging
+  related_issue_ids:
+  - packaging_leak_problem
+  - formula_change_concern
+  related_aspect_ids: []
+  metadata: {}
+- id: skin_compatibility
+  label: Skin-Type Compatibility
+  description: Discussion of fit for oily, dry, sensitive, treatment, or acne-prone
+    skin.
+  seed_phrases:
+  - da dầu
+  - da khô
+  - da nhạy cảm
+  - treatment
+  - retinol
+  - tret
+  - sensitive skin
+  - oily skin
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  linked_topic_keys:
+  - cleanser_recommendation_by_skin_type
+  - gentle_hydrating_cleansers
+  - oily_acne_cleansers
+  related_issue_ids:
+  - irritation_redness
+  - breakout_after_use
+  - dryness_tightness_problem
+  related_aspect_ids: []
+  metadata: {}
+- id: authenticity
+  label: Authenticity and Buying Confidence
+  description: Discussion of fake goods, official mall, trusted retailer, and authenticity
+    checking.
+  seed_phrases:
+  - fake
+  - auth
+  - chính hãng
+  - official mall
+  - mall
+  - hàng giả
+  - check auth
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_authenticity_and_fake_goods
+  - cleanser_price_value_and_promo
+  related_issue_ids:
+  - fake_authenticity_concern
+  related_aspect_ids: []
+  metadata: {}
+- id: formula_change
+  label: Formula Change
+  description: Discussion of reformulation, texture changes, and new-vs-old version
+    comparisons.
+  seed_phrases:
+  - đổi công thức
+  - đổi formula
+  - bản mới
+  - bản cũ
+  - reformulated
+  - texture khác
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_formula_and_packaging
+  related_issue_ids:
+  - formula_change_concern
+  related_aspect_ids: []
+  metadata: {}
+intent_categories:
+- id: question
+  label: Question
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: complaint
+  label: Complaint
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: commentary
+  label: Commentary
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: praise
+  label: Praise
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: purchase_intent
+  label: Purchase Intent
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: recommendation
+  label: Recommendation
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: compare
+  label: Comparison
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: rumor_speculation
+  label: Rumor or Speculation
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: job_interest
+  label: Job Interest
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: investment_interest
+  label: Investment Interest
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+issue_categories:
+- id: breakout_after_use
+  label: Breakout After Use
+  description: Concern that cleanser causes pimples, bumps, or clogged pores.
+  seed_phrases:
+  - lên mụn
+  - nổi mụn
+  - bí da
+  - mụn ẩn
+  - breakout
+  - clog
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - oily_acne_cleansers
+  - cleanser_recommendation_by_skin_type
+  related_issue_ids: []
+  related_aspect_ids:
+  - acne_support
+  - skin_compatibility
+  metadata: {}
+- id: irritation_redness
+  label: Irritation and Redness
+  description: Irritation, stinging, redness, or eye sensitivity after use.
+  seed_phrases:
+  - rát
+  - đỏ da
+  - cay mắt
+  - kích ứng
+  - châm chích
+  - irritation
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  linked_topic_keys:
+  - gentle_hydrating_cleansers
+  - cleanser_recommendation_by_skin_type
+  related_issue_ids: []
+  related_aspect_ids:
+  - skin_compatibility
+  - fragrance_scent
+  metadata: {}
+- id: dryness_tightness_problem
+  label: Dryness and Tightness Problem
+  description: Over-cleansing or stripped-skin complaints.
+  seed_phrases:
+  - khô căng
+  - rít da
+  - căng mặt
+  - stripped
+  - quá khô
+  - tightness
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - gentle_hydrating_cleansers
+  - oily_acne_cleansers
+  - cleanser_brand_comparison
+  related_issue_ids: []
+  related_aspect_ids:
+  - hydration
+  - oil_control
+  - skin_compatibility
+  metadata: {}
+- id: fake_authenticity_concern
+  label: Fake and Authenticity Concern
+  description: Concern that goods are fake, mixed stock, or from untrusted sellers.
+  seed_phrases:
+  - fake
+  - auth
+  - hàng giả
+  - official mall
+  - check auth
+  - giả tràn lan
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_authenticity_and_fake_goods
+  - cleanser_price_value_and_promo
+  related_issue_ids: []
+  related_aspect_ids:
+  - authenticity
+  metadata: {}
+- id: packaging_leak_problem
+  label: Packaging Leak Problem
+  description: Packaging leaks, cap issues, or pump failure.
+  seed_phrases:
+  - bị leak
+  - chảy ra ngoài
+  - nắp lỏng
+  - pump lỗi
+  - vỡ nắp
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_formula_and_packaging
+  related_issue_ids: []
+  related_aspect_ids:
+  - packaging
+  metadata: {}
+- id: formula_change_concern
+  label: Formula Change Concern
+  description: Worries that a reformulation changed cleansing feel or skin compatibility.
+  seed_phrases:
+  - đổi công thức
+  - bản mới khác
+  - reformulated
+  - changed formula
+  - texture khác
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_formula_and_packaging
+  related_issue_ids: []
+  related_aspect_ids:
+  - formula_change
+  - skin_compatibility
+  metadata: {}
+- id: overpriced_concern
+  label: Overpriced Concern
+  description: Complaints that price is too high for cleanser performance or size.
+  seed_phrases:
+  - đắt
+  - tăng giá
+  - chát
+  - không đáng
+  - overpriced
+  - price hike
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_price_value_and_promo
+  - cleanser_brand_comparison
+  related_issue_ids: []
+  related_aspect_ids:
+  - price_value
+  metadata: {}
+- id: strong_fragrance_complaint
+  label: Strong Fragrance Complaint
+  description: Complaints that scent is too strong or unwanted.
+  seed_phrases:
+  - mùi nồng
+  - thơm quá
+  - hương liệu mạnh
+  - strong fragrance
+  - scented too much
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  linked_topic_keys:
+  - cleanser_texture_foam_scent
+  - gentle_hydrating_cleansers
+  related_issue_ids: []
+  related_aspect_ids:
+  - fragrance_scent
+  metadata: {}
+- id: residue_rinse_problem
+  label: Residue and Rinse Problem
+  description: Complaints that cleanser leaves a film or is hard to rinse clean.
+  seed_phrases:
+  - trơn trơn
+  - khó rửa
+  - còn màng
+  - residue
+  - rinse chưa sạch
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - cleanser_texture_foam_scent
+  - cleanser_brand_comparison
+  related_issue_ids: []
+  related_aspect_ids:
+  - cleansing_power
+  - foam_texture
+  metadata: {}
+- id: overdrying_after_oil_control
+  label: Overdrying After Oil Control
+  description: Product controls oil but strips the skin too much.
+  seed_phrases:
+  - sạch dầu nhưng khô
+  - kiềm dầu quá tay
+  - clean but dry
+  - stripped after wash
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  linked_topic_keys:
+  - oily_acne_cleansers
+  - cleanser_brand_comparison
+  related_issue_ids: []
+  related_aspect_ids:
+  - oil_control
+  - hydration
+  metadata: {}
+source_channels:
+- id: tiktok
+  label: TikTok
+- id: facebook
+  label: Facebook
+- id: youtube
+  label: YouTube
+entities:
+- id: brand.cetaphil
+  name: Cetaphil
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cetaphil
+  - ceta
+  - cetaphil new formula
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Gentle-cleanser brand frequently discussed for sensitive skin.
+  related_phrases:
+  - srm dịu nhẹ
+  - da nhạy cảm
+  - treatment friendly
+- id: brand.cerave
+  name: CeraVe
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cerave
+  - cera ve
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Barrier-focused cleanser brand frequently compared in hydration and
+    acne routines.
+  related_phrases:
+  - ceramide cleanser
+  - barrier repair
+  - hydrating cleanser
+- id: brand.la_roche_posay
+  name: La Roche-Posay
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - la roche-posay
+  - la roche posay
+  - lrp
+  compact_aliases:
+  - lrp
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Derma skincare brand often discussed for oily and acne-prone skin cleansers.
+  related_phrases:
+  - effaclar
+  - da dầu mụn
+  - oily sensitive skin
+- id: brand.senka
+  name: Senka
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - senka
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Mass-market cleanser brand commonly discussed for foam texture and
+    value.
+  related_phrases:
+  - perfect whip
+  - bọt dày
+  - giá mềm
+- id: brand.hada_labo
+  name: Hada Labo
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - hada labo
+  - hadalabo
+  - hl
+  compact_aliases:
+  - hl
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Cleanser brand frequently discussed for hydration and acne-care lines.
+  related_phrases:
+  - advanced nourish
+  - hyaluronic acid
+  - acne care
+- id: brand.simple
+  name: Simple
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - simple
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Gentle cleanser brand often mentioned for sensitive skin and fragrance
+    concerns.
+  related_phrases:
+  - kind to skin
+  - dịu nhẹ
+  - fragrance free
+  anti_confusion_phrases:
+  - simple là
+  - simple tip
+  - simple routine
+  - simple step
+- id: brand.eucerin
+  name: Eucerin
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - eucerin
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Skincare brand discussed for ProAcne and pH-balanced cleansing lines.
+  related_phrases:
+  - pro acne
+  - pH5
+  - da nhạy cảm
+- id: brand.svr
+  name: SVR
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - svr
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Skincare brand commonly mentioned for oil-control cleanser discussion.
+  related_phrases:
+  - sebiaclear
+  - gel moussant
+  - da dầu
+- id: brand.bioderma
+  name: Bioderma
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - bioderma
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Cleanser brand commonly discussed through Sensibio and Sebium lines.
+  related_phrases:
+  - sebium
+  - sensibio
+  - gentle gel
+- id: brand.cocoon
+  name: Cocoon
+  entity_type: brand
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cocoon
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  - category.consumer_goods
+  description: Vietnamese skincare brand often discussed for Winter Melon cleanser
+    and acne routines.
+  related_phrases:
+  - bí đao
+  - winter melon
+  - da dầu mụn
+- id: product.cetaphil_gentle_skin_cleanser
+  name: Cetaphil Gentle Skin Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cetaphil gentle skin cleanser
+  - cetaphil gentle
+  - gentle skin cleanser
+  - cetaphil xanh dương
+  compact_aliases:
+  - cetaphilgentle
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Gentle daily cleanser often discussed for sensitive and treatment skin.
+  related_phrases:
+  - không tạo bọt nhiều
+  - dịu nhẹ
+  - da treatment
+- id: product.cetaphil_oily_skin_cleanser
+  name: Cetaphil Oily Skin Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cetaphil oily skin cleanser
+  - cetaphil oily
+  - ceta oily
+  compact_aliases:
+  - cetaphiloily
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Cetaphil cleanser variant discussed for oily skin.
+  related_phrases:
+  - oil control
+  - da dầu
+  - ít kích ứng
+- id: product.cerave_hydrating_cleanser
+  name: CeraVe Hydrating Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cerave hydrating cleanser
+  - cerave hydrating
+  - cerave dưỡng ẩm
+  - cerave xanh lá nhạt
+  compact_aliases:
+  - ceravehydrating
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Hydrating cleanser commonly compared against Cetaphil and Simple.
+  related_phrases:
+  - ceramide
+  - hydrating
+  - barrier
+- id: product.cerave_foaming_cleanser
+  name: CeraVe Foaming Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cerave foaming cleanser
+  - cerave foaming
+  - cerave foam
+  - cerave xanh lá
+  compact_aliases:
+  - ceravefoam
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Foaming cleanser discussed for oily and combination skin.
+  related_phrases:
+  - bọt vừa
+  - clean finish
+  - da dầu
+- id: product.cerave_sa_smoothing_cleanser
+  name: CeraVe SA Smoothing Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cerave sa smoothing cleanser
+  - cerave sa
+  - sa smoothing
+  - cerave sa smoothing
+  compact_aliases:
+  - ceravesa
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Salicylic-acid cleanser discussed for texture and clogged pores.
+  related_phrases:
+  - sa
+  - rough texture
+  - mụn ẩn
+- id: product.lrp_effaclar_purifying_foaming_gel
+  name: La Roche-Posay Effaclar Purifying Foaming Gel
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - la roche-posay effaclar purifying foaming gel
+  - lrp effaclar
+  - effaclar gel
+  - gel rửa mặt lrp
+  - effaclar xanh
+  compact_aliases:
+  - lrpeffaclar
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Oily/acne cleanser commonly discussed for foam, cleanliness, and dryness
+    tradeoffs.
+  related_phrases:
+  - da dầu mụn
+  - sạch sâu
+  - hơi rít
+- id: product.lrp_toleriane_dermo_cleanser
+  name: La Roche-Posay Toleriane Dermo-Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - la roche-posay toleriane dermo-cleanser
+  - lrp toleriane
+  - toleriane dermo
+  - toleriane trắng
+  compact_aliases:
+  - lrptoleriane
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Gentle cleanser discussed for sensitive and treatment skin.
+  related_phrases:
+  - sensitive skin
+  - treatment
+  - non-stripping
+- id: product.senka_perfect_whip
+  name: Senka Perfect Whip
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - senka perfect whip
+  - perfect whip
+  - senka xanh
+  - perfect whip xanh
+  compact_aliases:
+  - senkawhip
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Popular foaming cleanser discussed for dense foam and value.
+  related_phrases:
+  - bọt dày
+  - giá mềm
+  - sạch kin kít
+- id: product.senka_perfect_white_clay
+  name: Senka Perfect White Clay
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - senka perfect white clay
+  - white clay
+  - senka trắng
+  - white clay senka
+  compact_aliases:
+  - senkawhiteclay
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Senka cleanser variant discussed for texture and brightening perceptions.
+  related_phrases:
+  - đất sét trắng
+  - bọt mịn
+  - sạch sâu
+- id: product.senka_perfect_whip_acne_care
+  name: Senka Perfect Whip Acne Care
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - senka perfect whip acne care
+  - senka acne care
+  - perfect whip acne
+  - senka xanh lá
+  compact_aliases:
+  - senkaacne
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Senka cleanser variant discussed for oily and acne skin.
+  related_phrases:
+  - da dầu mụn
+  - sạch dầu
+  - bọt nhiều
+- id: product.hada_labo_advanced_nourish_cleanser
+  name: Hada Labo Advanced Nourish Hyaluronic Acid Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - hada labo advanced nourish hyaluronic acid cleanser
+  - hada labo advanced nourish
+  - hada labo dưỡng ẩm
+  - hada labo trắng
+  compact_aliases:
+  - hlnourish
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Hydrating cleanser discussed for soft finish and value.
+  related_phrases:
+  - hyaluronic acid
+  - dưỡng ẩm
+  - mềm da
+- id: product.hada_labo_acne_care_calming_cleanser
+  name: Hada Labo Acne Care Calming Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - hada labo acne care calming cleanser
+  - hada labo acne care
+  - hada labo acne
+  - hada labo xanh lá
+  compact_aliases:
+  - hlacne
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Acne-care cleanser discussed for gentle oil control.
+  related_phrases:
+  - mụn ẩn
+  - dịu da
+  - da dầu
+- id: product.simple_refreshing_facial_wash
+  name: Simple Refreshing Facial Wash
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - simple refreshing facial wash
+  - simple refreshing
+  - simple xanh lá
+  - simple gel
+  compact_aliases:
+  - simplerefresh
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Simple cleanser discussed for low-fragrance, low-irritation cleansing.
+  related_phrases:
+  - fragrance free
+  - sensitive skin
+  - gel wash
+- id: product.simple_moisturising_facial_wash
+  name: Simple Moisturising Facial Wash
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - simple moisturising facial wash
+  - simple moisturising
+  - simple xanh dương
+  - simple dịu nhẹ
+  compact_aliases:
+  - simplemoist
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Gentle hydrating Simple cleanser variant.
+  related_phrases:
+  - ẩm mượt
+  - nhẹ mặt
+  - treatment
+- id: product.eucerin_proacne_cleansing_gel
+  name: Eucerin ProAcne Solution Cleansing Gel
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - eucerin proacne solution cleansing gel
+  - eucerin proacne
+  - pro acne eucerin
+  - eucerin xanh
+  compact_aliases:
+  - eucerinproacne
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Acne cleanser discussed for oil control and sensitivity tradeoffs.
+  related_phrases:
+  - da dầu mụn
+  - sạch dầu
+  - treatment
+- id: product.eucerin_ph5_facial_cleanser
+  name: Eucerin pH5 Facial Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - eucerin ph5 facial cleanser
+  - eucerin ph5
+  - ph5 facial cleanser
+  - eucerin hồng
+  compact_aliases:
+  - eucerinph5
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: pH-balanced cleanser discussed for sensitive or dry skin.
+  related_phrases:
+  - ph5
+  - da nhạy cảm
+  - dịu nhẹ
+- id: product.svr_sebiaclear_gel_moussant
+  name: SVR Sebiaclear Gel Moussant
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - svr sebiaclear gel moussant
+  - svr sebiaclear
+  - sebiaclear gel
+  - svr xanh
+  compact_aliases:
+  - svrsebiaclear
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Oil-control gel cleanser often discussed against LRP and Bioderma.
+  related_phrases:
+  - gel moussant
+  - da dầu
+  - giá cao
+- id: product.bioderma_sebium_gel_moussant
+  name: Bioderma Sebium Gel Moussant
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - bioderma sebium gel moussant
+  - bioderma sebium
+  - sebium gel moussant
+  - bioderma xanh
+  compact_aliases:
+  - biodermasebium
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Oily/acne cleanser discussed for gentle cleansing versus deeper oil
+    control.
+  related_phrases:
+  - da dầu
+  - dịu hơn lrp
+  - gel rửa mặt
+- id: product.bioderma_sensibio_gel_moussant
+  name: Bioderma Sensibio Gel Moussant
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - bioderma sensibio gel moussant
+  - bioderma sensibio
+  - sensibio gel moussant
+  - bioderma hồng
+  compact_aliases:
+  - biodermasensibio
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Gentle Bioderma cleanser discussed for sensitive skin.
+  related_phrases:
+  - da nhạy cảm
+  - ít kích ứng
+  - nhẹ mặt
+- id: product.cocoon_winter_melon_cleanser
+  name: Cocoon Winter Melon Cleanser
+  entity_type: product
+  knowledge_layer: domain
+  target_eligible: true
+  aliases:
+  - cocoon winter melon cleanser
+  - cocoon bí đao
+  - winter melon cleanser
+  - gel rửa mặt bí đao
+  compact_aliases:
+  - cocoonwintermelon
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Vietnamese cleanser discussed for oil-control and acne-prone routines.
+  related_phrases:
+  - bí đao
+  - da dầu mụn
+  - nội địa
+- id: concept.facial_cleanser
+  name: Facial cleanser
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  target_eligible: false
+  aliases:
+  - sữa rửa mặt
+  - srm
+  - cleanser
+  - face wash
+  - gel rửa mặt
+  compact_aliases:
+  - srm
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Generic cleanser concept.
+  related_phrases:
+  - wash face
+  - morning cleanser
+  - second cleanse
+- id: concept.low_ph_cleanser
+  name: Low pH cleanser
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  target_eligible: false
+  aliases:
+  - low pH cleanser
+  - srm low ph
+  - độ pH thấp
+  - ph thấp
+  compact_aliases:
+  - lowph
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Concept for low-pH gentle cleansing.
+  related_phrases:
+  - barrier friendly
+  - dịu nhẹ
+  - không rít
+- id: concept.fragrance_free_cleanser
+  name: Fragrance-free cleanser
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  target_eligible: false
+  aliases:
+  - fragrance free cleanser
+  - không hương liệu
+  - fragrance-free
+  - không mùi
+  compact_aliases:
+  - fragrancefree
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Concept for fragrance-free gentle cleansers.
+  related_phrases:
+  - sensitive skin
+  - ít kích ứng
+- id: concept.double_cleansing
+  name: Double cleansing
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  target_eligible: false
+  aliases:
+  - double cleansing
+  - double cleanse
+  - tẩy trang rồi srm
+  - 2 bước làm sạch
+  compact_aliases:
+  - doublecleanse
+  taxonomy_ids:
+  - category.beauty_cosmetics
+  description: Cleansing routine concept mentioned in comments and recommendations.
+  related_phrases:
+  - first cleanse
+  - second cleanse
+topics:
+- topic_key: cleanser_brand_comparison
+  label: Cleanser Brand and Product Comparison
+  topic_family: cleanser_comparison
+  main_path_policy: domain_primary
+  description: Comparisons between cleanser brands and product lines on finish, performance,
+    and suitability.
+  knowledge_layer: domain
+  seed_phrases:
+  - so sánh
+  - vs
+  - compare
+  - hơn
+  - nên chọn
+  - pick
+  - battle
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  negative_phrases:
+  - official mall
+  - fake
+  - hàng giả
+  - check auth
+  related_entity_ids:
+  - brand.cetaphil
+  - brand.cerave
+  - brand.la_roche_posay
+  - brand.senka
+  - brand.hada_labo
+  - brand.simple
+  - brand.eucerin
+  - brand.svr
+  - brand.bioderma
+  - brand.cocoon
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - cleansing_power
+  - hydration
+  - oil_control
+  - foam_texture
+  - price_value
+  - skin_compatibility
+  related_issue_ids:
+  - dryness_tightness_problem
+  - overpriced_concern
+  - residue_rinse_problem
+  compatible_entity_types:
+  - brand
+  - product
+  excluded_domain_tags: []
+- topic_key: gentle_hydrating_cleansers
+  label: Gentle and Hydrating Cleansers
+  topic_family: cleanser_hydration
+  main_path_policy: domain_primary
+  description: Discussion of gentle cleansers, low-pH cleansers, and hydration-friendly
+    washing.
+  knowledge_layer: domain
+  seed_phrases:
+  - dịu nhẹ
+  - gentle
+  - hydrating
+  - low ph
+  - không khô
+  - da nhạy cảm
+  - treatment
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  negative_phrases:
+  - official mall
+  - fake
+  - flash sale
+  - sale sâu
+  related_entity_ids:
+  - brand.cetaphil
+  - brand.cerave
+  - brand.simple
+  - brand.hada_labo
+  - brand.eucerin
+  - product.cetaphil_gentle_skin_cleanser
+  - product.cerave_hydrating_cleanser
+  - product.simple_moisturising_facial_wash
+  - product.hada_labo_advanced_nourish_cleanser
+  - product.eucerin_ph5_facial_cleanser
+  - concept.low_ph_cleanser
+  - concept.fragrance_free_cleanser
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - hydration
+  - skin_compatibility
+  - fragrance_scent
+  related_issue_ids:
+  - dryness_tightness_problem
+  - irritation_redness
+  - strong_fragrance_complaint
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  excluded_domain_tags: []
+- topic_key: oily_acne_cleansers
+  label: Oily and Acne-Prone Skin Cleansers
+  topic_family: cleanser_oily_acne
+  main_path_policy: domain_primary
+  description: Discussion of cleansers aimed at oily, acne-prone, or congested skin.
+  knowledge_layer: domain
+  seed_phrases:
+  - da dầu mụn
+  - oil control
+  - acne
+  - kiềm dầu
+  - sạch sâu
+  - mụn ẩn
+  - lỗ chân lông
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  negative_phrases:
+  - official mall
+  - fake
+  - da nhạy cảm thuần
+  related_entity_ids:
+  - brand.la_roche_posay
+  - brand.svr
+  - brand.bioderma
+  - brand.eucerin
+  - brand.senka
+  - brand.cocoon
+  - product.lrp_effaclar_purifying_foaming_gel
+  - product.svr_sebiaclear_gel_moussant
+  - product.bioderma_sebium_gel_moussant
+  - product.eucerin_proacne_cleansing_gel
+  - product.senka_perfect_whip_acne_care
+  - product.cocoon_winter_melon_cleanser
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - oil_control
+  - acne_support
+  - cleansing_power
+  related_issue_ids:
+  - breakout_after_use
+  - overdrying_after_oil_control
+  - dryness_tightness_problem
+  compatible_entity_types:
+  - brand
+  - product
+  excluded_domain_tags: []
+- topic_key: cleanser_texture_foam_scent
+  label: Cleanser Texture, Foam, and Scent
+  topic_family: cleanser_texture_scent
+  main_path_policy: domain_primary
+  description: Discussion of foam density, gel/cream texture, rinse feel, and fragrance.
+  knowledge_layer: domain
+  seed_phrases:
+  - bọt
+  - foam
+  - texture
+  - gel
+  - cream
+  - mùi
+  - fragrance
+  - thơm
+  - rửa xong
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  negative_phrases:
+  - official mall
+  - fake
+  - sale sâu
+  related_entity_ids:
+  - brand.senka
+  - brand.cocoon
+  - brand.simple
+  - brand.cerave
+  - product.senka_perfect_whip
+  - product.senka_perfect_white_clay
+  - product.cocoon_winter_melon_cleanser
+  - product.simple_refreshing_facial_wash
+  - product.cerave_foaming_cleanser
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - foam_texture
+  - fragrance_scent
+  - cleansing_power
+  related_issue_ids:
+  - strong_fragrance_complaint
+  - residue_rinse_problem
+  compatible_entity_types:
+  - brand
+  - product
+  excluded_domain_tags: []
+- topic_key: cleanser_price_value_and_promo
+  label: Cleanser Price, Value, and Promotions
+  topic_family: pricing_value
+  main_path_policy: domain_primary
+  description: Discussion of price, discount, gifting, and whether a cleanser is worth
+    buying.
+  knowledge_layer: domain
+  seed_phrases:
+  - giá
+  - sale
+  - promo
+  - deal
+  - bill
+  - worth
+  - đáng tiền
+  - flash sale
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  negative_phrases:
+  - breakout
+  - kích ứng
+  - irritation
+  related_entity_ids:
+  - brand.cetaphil
+  - brand.cerave
+  - brand.la_roche_posay
+  - brand.senka
+  - brand.hada_labo
+  - brand.bioderma
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - price_value
+  - authenticity
+  related_issue_ids:
+  - overpriced_concern
+  - fake_authenticity_concern
+  compatible_entity_types:
+  - brand
+  - product
+  excluded_domain_tags: []
+- topic_key: cleanser_authenticity_and_fake_goods
+  label: Cleanser Authenticity and Fake Goods
+  topic_family: cleanser_authenticity
+  main_path_policy: domain_primary
+  description: Discussion of official mall, fake goods, trusted sellers, and authenticity
+    checks.
+  knowledge_layer: domain
+  seed_phrases:
+  - fake
+  - auth
+  - official mall
+  - hàng giả
+  - check auth
+  - real hay fake
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  issue_centric: true
+  related_entity_ids:
+  - brand.cetaphil
+  - brand.cerave
+  - brand.la_roche_posay
+  - brand.senka
+  - brand.bioderma
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - authenticity
+  related_issue_ids:
+  - fake_authenticity_concern
+  compatible_entity_types:
+  - brand
+  - product
+  excluded_domain_tags: []
+- topic_key: cleanser_formula_and_packaging
+  label: Cleanser Formula and Packaging Changes
+  topic_family: cleanser_formula_packaging
+  main_path_policy: domain_primary
+  description: Discussion of reformulation, old-vs-new versions, pump/tube issues,
+    and pack size.
+  knowledge_layer: domain
+  seed_phrases:
+  - đổi công thức
+  - bản mới
+  - bản cũ
+  - pump
+  - tuýp
+  - leak
+  - bao bì
+  - size
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  negative_phrases:
+  - official mall
+  - fake
+  related_entity_ids:
+  - brand.cetaphil
+  - brand.simple
+  - brand.cerave
+  - brand.hada_labo
+  - product.cetaphil_gentle_skin_cleanser
+  - product.simple_refreshing_facial_wash
+  - product.cerave_hydrating_cleanser
+  - product.hada_labo_advanced_nourish_cleanser
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - packaging
+  - formula_change
+  related_issue_ids:
+  - packaging_leak_problem
+  - formula_change_concern
+  compatible_entity_types:
+  - brand
+  - product
+  excluded_domain_tags: []
+- topic_key: cleanser_recommendation_by_skin_type
+  label: Cleanser Recommendation by Skin Type
+  topic_family: cleanser_skin_type
+  main_path_policy: domain_primary
+  description: Recommendation requests and peer advice for oily, dry, sensitive, and
+    treatment skin.
+  knowledge_layer: domain
+  seed_phrases:
+  - xin recommend
+  - da dầu
+  - da khô
+  - da nhạy cảm
+  - treatment
+  - nên chọn
+  - hợp da nào
+  domain_tags:
+  - beauty_cosmetics
+  - facial_cleanser_vn
+  negative_phrases:
+  - sale
+  - promo
+  - official mall
+  - fake
+  related_entity_ids:
+  - brand.cetaphil
+  - brand.cerave
+  - brand.la_roche_posay
+  - brand.simple
+  - brand.eucerin
+  - concept.low_ph_cleanser
+  - concept.fragrance_free_cleanser
+  related_taxonomy_ids:
+  - category.beauty_cosmetics
+  related_aspect_ids:
+  - skin_compatibility
+  - hydration
+  - oil_control
+  - acne_support
+  related_issue_ids:
+  - irritation_redness
+  - breakout_after_use
+  - dryness_tightness_problem
+  compatible_entity_types:
+  - brand
+  - product
+  - concept
+  excluded_domain_tags: []
+alias_contributions:
+- canonical_entity_id: brand.la_roche_posay
+  alias: la roche
+  entity_type: brand
+  source: cleanser_overlay
+- canonical_entity_id: product.lrp_effaclar_purifying_foaming_gel
+  alias: effaclar
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.senka_perfect_whip
+  alias: senka xanh
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.senka_perfect_white_clay
+  alias: senka trắng
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.hada_labo_advanced_nourish_cleanser
+  alias: hada labo trắng
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.hada_labo_acne_care_calming_cleanser
+  alias: hada labo xanh lá
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.simple_refreshing_facial_wash
+  alias: simple xanh lá
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.simple_moisturising_facial_wash
+  alias: simple xanh dương
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.bioderma_sebium_gel_moussant
+  alias: bioderma xanh
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.bioderma_sensibio_gel_moussant
+  alias: bioderma hồng
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: product.cocoon_winter_melon_cleanser
+  alias: cocoon bí đao
+  entity_type: product
+  source: cleanser_overlay
+- canonical_entity_id: concept.facial_cleanser
+  alias: srm
+  entity_type: concept
+  source: cleanser_overlay
+noise_terms:
+- term: mn
+  reason: social filler shorthand, not a meaningful entity
+  source: cleanser_overlay
+- term: pass
+  reason: low-information reaction filler
+  source: cleanser_overlay
+- term: okela
+  reason: low-information slang residue
+  source: cleanser_overlay
+- term: xịn xò
+  reason: low-information compliment residue
+  source: cleanser_overlay
+- term: rv real
+  reason: generic review request residue
+  source: cleanser_overlay
+activation:
+  signals:
+  - phrase: s?a r?a m?t
+    weight: 1.45
+  - phrase: sua rua mat
+    weight: 1.45
+  - phrase: face wash
+    weight: 1.2
+  - phrase: gel rua mat
+    weight: 1.25
+  - phrase: da dau mun
+    weight: 1.15
+  - phrase: da nhay cam
+    weight: 1.15
+  - phrase: official mall
+    weight: 1.05
+  - phrase: fake
+    weight: 1.05
+  - phrase: cetaphil
+    weight: 1.2
+  - phrase: cerave
+    weight: 1.2
+  - phrase: effaclar
+    weight: 1.2
+  - phrase: simple refreshing
+    weight: 1.1
+domain_id: facial_cleanser_vn
+loaded_overlays: []

@@ -1,0 +1,1195 @@
+metadata:
+  name: beer-vn
+  version: 2026.03.22-identity-spine
+  description: beer-vn example domain ontology for cross-domain smoke and fixture
+    validation.
+entity_types:
+- brand
+- product
+- product_line
+- category
+- feature
+- issue
+- benefit
+- campaign
+- retailer
+- influencer
+- organization
+- person
+- location
+- facility
+- concept
+taxonomy_nodes:
+- id: category.consumer_goods
+  label: Consumer Goods
+  node_type: category
+- id: category.automotive
+  label: Automotive
+  node_type: category
+- id: category.electronics
+  label: Electronics
+  node_type: category
+- id: category.jobs_recruitment
+  label: Jobs and Recruitment
+  node_type: category
+- id: category.market_expansion
+  label: Market Expansion
+  node_type: category
+- id: category.manufacturing
+  label: Manufacturing
+  node_type: category
+- id: category.service_operations
+  label: Service Operations
+  node_type: category
+- id: category.investment
+  label: Investment
+  node_type: category
+- id: feature.price
+  label: Price
+  node_type: feature
+- id: feature.quality
+  label: Quality
+  node_type: feature
+- id: feature.design
+  label: Design
+  node_type: feature
+- id: feature.durability
+  label: Durability
+  node_type: feature
+- id: feature.availability
+  label: Availability
+  node_type: feature
+- id: feature.customer_service
+  label: Customer Service
+  node_type: feature
+- id: feature.delivery
+  label: Delivery
+  node_type: feature
+- id: feature.usability
+  label: Usability
+  node_type: feature
+aspect_categories:
+- id: price
+  label: Price
+  description: Price point, financing, cost, and value-for-money discussion.
+  seed_phrases:
+  - giá
+  - gia
+  - price
+  - pricing
+  - cost
+  - đắt
+  - dat
+  - rẻ
+  - re
+  - value
+  - worth
+  - trả góp
+  - tra gop
+  negative_phrases:
+  - flash sale
+  - voucher code
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - retailer
+  - organization
+  - concept
+  linked_topic_keys:
+  - pricing_and_value
+  related_issue_ids:
+  - pricing_value_concern
+  related_aspect_ids: []
+  metadata: {}
+- id: quality
+  label: Quality
+  description: Overall build quality, finishing, reliability, and perceived product
+    quality.
+  seed_phrases:
+  - chất lượng
+  - chat luong
+  - quality
+  - build
+  - hoàn thiện
+  - hoan thien
+  - finish
+  - texture
+  - vật liệu
+  - vat lieu
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - concept
+  linked_topic_keys:
+  - product_experience
+  related_issue_ids:
+  - product_defect
+  related_aspect_ids: []
+  metadata: {}
+- id: design
+  label: Design
+  description: Styling, aesthetics, packaging, appearance, and visual design.
+  seed_phrases:
+  - thiết kế
+  - thiet ke
+  - design
+  - kiểu dáng
+  - kieu dang
+  - style
+  - look
+  - mẫu mã
+  - mau ma
+  - đẹp
+  - dep
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - concept
+  linked_topic_keys:
+  - product_experience
+  - launch
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: durability
+  label: Durability
+  description: Longevity, wear, breakage risk, and robustness over time.
+  seed_phrases:
+  - bền
+  - ben
+  - durability
+  - durable
+  - wear
+  - broken
+  - xuống cấp
+  - xuong cap
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - concept
+  linked_topic_keys:
+  - product_experience
+  related_issue_ids:
+  - product_defect
+  related_aspect_ids: []
+  metadata: {}
+- id: availability
+  label: Availability
+  description: Stock, availability, supply, and purchase readiness.
+  seed_phrases:
+  - available
+  - availability
+  - stock
+  - có hàng
+  - co hang
+  - hết hàng
+  - het hang
+  - sold out
+  - backorder
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - retailer
+  - concept
+  linked_topic_keys:
+  - launch
+  related_issue_ids:
+  - availability_problem
+  - rollout_delay
+  related_aspect_ids: []
+  metadata: {}
+- id: customer_service
+  label: Customer Service
+  description: Support quality, response speed, service process, and after-sales care.
+  seed_phrases:
+  - customer service
+  - service
+  - support
+  - chăm sóc khách hàng
+  - cham soc khach hang
+  - cskh
+  - bảo hành
+  - bao hanh
+  - tư vấn
+  - tu van
+  - hotline
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - organization
+  - retailer
+  - facility
+  - concept
+  linked_topic_keys:
+  - service_and_support
+  related_issue_ids:
+  - service_problem
+  related_aspect_ids: []
+  metadata: {}
+- id: delivery
+  label: Delivery
+  description: Shipping, handover, arrival, and delivery operations.
+  seed_phrases:
+  - giao hàng
+  - giao
+  - delivery
+  - ship
+  - shipping
+  - nhận hàng
+  - nhan hang
+  - giao chậm
+  - late delivery
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - retailer
+  - organization
+  - concept
+  linked_topic_keys:
+  - launch
+  related_issue_ids:
+  - delivery_problem
+  - rollout_delay
+  related_aspect_ids: []
+  metadata: {}
+- id: trust
+  label: Trust
+  description: Credibility, honesty, reliability, and confidence in the brand or source.
+  seed_phrases:
+  - trust
+  - uy tín
+  - uy tin
+  - fake
+  - scam
+  - legit
+  - đáng tin
+  - dang tin
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - organization
+  - retailer
+  - influencer
+  - concept
+  linked_topic_keys:
+  - service_and_support
+  - pricing_and_value
+  related_issue_ids:
+  - trust_concern
+  related_aspect_ids: []
+  metadata: {}
+- id: usability
+  label: Usability
+  description: Ease of use, setup flow, navigation, and interaction quality.
+  seed_phrases:
+  - usability
+  - easy
+  - dễ dùng
+  - de dung
+  - khó dùng
+  - kho dung
+  - confusing
+  - setup flow
+  - checkout flow
+  - thao tác
+  - thao tac
+  negative_phrases: []
+  compatible_entity_types:
+  - product
+  - product_line
+  - feature
+  - concept
+  - brand
+  linked_topic_keys:
+  - product_experience
+  - service_and_support
+  related_issue_ids:
+  - usability_problem
+  related_aspect_ids: []
+  metadata: {}
+- id: charging
+  label: Charging
+  description: Charging speed, station access, charging compatibility, and charging
+    reliability.
+  seed_phrases:
+  - charging
+  - charge
+  - sạc
+  - sac
+  - trạm sạc
+  - tram sac
+  - charger
+  - charging station
+  negative_phrases: []
+  compatible_entity_types:
+  - product
+  - product_line
+  - brand
+  - facility
+  - concept
+  linked_topic_keys:
+  - service_and_support
+  related_issue_ids:
+  - availability_problem
+  related_aspect_ids: []
+  metadata: {}
+- id: expansion
+  label: Expansion
+  description: Market rollout, network growth, dealer footprint, and business expansion.
+  seed_phrases:
+  - expansion
+  - expand
+  - mở rộng
+  - mo rong
+  - rollout
+  - market entry
+  - dealer network
+  - showroom
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - organization
+  - location
+  - concept
+  linked_topic_keys:
+  - launch
+  related_issue_ids:
+  - rollout_delay
+  related_aspect_ids: []
+  metadata: {}
+intent_categories:
+- id: question
+  label: Question
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: complaint
+  label: Complaint
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: commentary
+  label: Commentary
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: praise
+  label: Praise
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: purchase_intent
+  label: Purchase Intent
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: recommendation
+  label: Recommendation
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: compare
+  label: Comparison
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: rumor_speculation
+  label: Rumor or Speculation
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: job_interest
+  label: Job Interest
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+- id: investment_interest
+  label: Investment Interest
+  seed_phrases: []
+  negative_phrases: []
+  compatible_entity_types: []
+  linked_topic_keys: []
+  related_issue_ids: []
+  related_aspect_ids: []
+  metadata: {}
+issue_categories:
+- id: product_defect
+  label: Product Defect
+  description: Defects, broken parts, malfunctions, or poor build issues.
+  seed_phrases:
+  - defect
+  - lỗi
+  - loi
+  - hỏng
+  - hong
+  - broken
+  - lỗi vặt
+  - loi vat
+  negative_phrases: []
+  compatible_entity_types:
+  - product
+  - product_line
+  - brand
+  - concept
+  linked_topic_keys:
+  - product_experience
+  related_issue_ids: []
+  related_aspect_ids:
+  - quality
+  - durability
+  metadata: {}
+- id: service_problem
+  label: Service Problem
+  description: Poor support quality, slow support, bad after-sales handling, or repair
+    friction.
+  seed_phrases:
+  - service problem
+  - support tệ
+  - support te
+  - chậm xử lý
+  - cham xu ly
+  - bảo hành tệ
+  - bao hanh te
+  - no response
+  - refund
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - organization
+  - retailer
+  - facility
+  - concept
+  linked_topic_keys:
+  - service_and_support
+  related_issue_ids: []
+  related_aspect_ids:
+  - customer_service
+  - delivery
+  metadata: {}
+- id: delivery_problem
+  label: Delivery Problem
+  description: Delayed handover, missed delivery, or broken delivery expectations.
+  seed_phrases:
+  - delivery problem
+  - giao chậm
+  - giao tre
+  - trễ giao
+  - tre giao
+  - late delivery
+  - chưa nhận hàng
+  - chua nhan hang
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - retailer
+  - organization
+  - concept
+  linked_topic_keys:
+  - launch
+  related_issue_ids: []
+  related_aspect_ids:
+  - delivery
+  - availability
+  metadata: {}
+- id: trust_concern
+  label: Trust Concern
+  description: Scam suspicion, lack of credibility, or trust erosion.
+  seed_phrases:
+  - scam
+  - fake
+  - lừa
+  - lua
+  - suspicious
+  - không tin
+  - khong tin
+  - trust issue
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - organization
+  - retailer
+  - influencer
+  - concept
+  linked_topic_keys:
+  - pricing_and_value
+  - service_and_support
+  related_issue_ids: []
+  related_aspect_ids:
+  - trust
+  metadata: {}
+- id: pricing_value_concern
+  label: Pricing or Value Concern
+  description: Price is too high, poor value, or pricing feels unreasonable.
+  seed_phrases:
+  - overpriced
+  - expensive
+  - đắt
+  - dat
+  - price cao
+  - không đáng
+  - khong dang
+  - not worth
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - retailer
+  - organization
+  - concept
+  linked_topic_keys:
+  - pricing_and_value
+  related_issue_ids: []
+  related_aspect_ids:
+  - price
+  - trust
+  metadata: {}
+- id: usability_problem
+  label: Usability Problem
+  description: Confusing flow, hard-to-use experience, awkward setup, or UX friction.
+  seed_phrases:
+  - hard to use
+  - confusing
+  - khó dùng
+  - kho dung
+  - setup flow
+  - checkout flow
+  - buggy flow
+  - thao tác khó
+  - thao tac kho
+  negative_phrases: []
+  compatible_entity_types:
+  - product
+  - product_line
+  - concept
+  - brand
+  linked_topic_keys:
+  - product_experience
+  - service_and_support
+  related_issue_ids: []
+  related_aspect_ids:
+  - usability
+  metadata: {}
+- id: availability_problem
+  label: Availability Problem
+  description: No stock, missing availability, inaccessible charging or support network.
+  seed_phrases:
+  - unavailable
+  - out of stock
+  - sold out
+  - hết hàng
+  - het hang
+  - thiếu trạm sạc
+  - thieu tram sac
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - retailer
+  - facility
+  - concept
+  linked_topic_keys:
+  - launch
+  - service_and_support
+  related_issue_ids: []
+  related_aspect_ids:
+  - availability
+  - charging
+  metadata: {}
+- id: rollout_delay
+  label: Rollout Delay
+  description: Launch, rollout, expansion, or production delay.
+  seed_phrases:
+  - delay
+  - rollout delay
+  - chậm mở bán
+  - cham mo ban
+  - lùi lịch
+  - lui lich
+  - backlog
+  negative_phrases: []
+  compatible_entity_types:
+  - brand
+  - product
+  - organization
+  - facility
+  - concept
+  linked_topic_keys:
+  - launch
+  related_issue_ids: []
+  related_aspect_ids:
+  - availability
+  - delivery
+  - expansion
+  metadata: {}
+source_channels:
+- id: tiktok
+  label: TikTok
+- id: facebook
+  label: Facebook
+- id: youtube
+  label: YouTube
+entities:
+- id: concept.manufacturing_facility
+  name: manufacturing facility
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - factory
+  - plant
+  - manufacturing facility
+  - production facility
+  - nhà máy
+  - nha may
+  - xưởng sản xuất
+  - xuong san xuat
+  compact_aliases:
+  - nhamay
+  taxonomy_ids:
+  - category.manufacturing
+  description: Generic manufacturing or production facility concept.
+  related_phrases:
+  - dây chuyền sản xuất
+  - day chuyen san xuat
+  - lắp ráp
+  - lap rap
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: concept.production_site
+  name: production site
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - production site
+  - production base
+  - assembly site
+  - assembly plant
+  - cơ sở sản xuất
+  - co so san xuat
+  compact_aliases: []
+  taxonomy_ids:
+  - category.manufacturing
+  description: Generic production or assembly site concept.
+  related_phrases:
+  - local assembly
+  - assembly line
+  - dây chuyền
+  - day chuyen
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: concept.facility_location
+  name: facility location
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: false
+  aliases:
+  - facility location
+  - factory location
+  - plant location
+  - site location
+  - địa điểm nhà máy
+  - dia diem nha may
+  compact_aliases: []
+  taxonomy_ids:
+  - category.manufacturing
+  description: Generic location reference for a plant or facility.
+  related_phrases:
+  - khu công nghiệp
+  - khu cong nghiep
+  - industrial park
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: concept.job_opening
+  name: job opening
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - job opening
+  - job vacancy
+  - opening
+  - tuyển dụng
+  - tuyen dung
+  - việc làm
+  - viec lam
+  - tuyển người
+  - tuyen nguoi
+  compact_aliases: []
+  taxonomy_ids:
+  - category.jobs_recruitment
+  description: Generic open-role or recruitment opportunity concept.
+  related_phrases:
+  - ứng tuyển
+  - ung tuyen
+  - hồ sơ
+  - ho so
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: concept.hiring_interest
+  name: hiring interest
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: false
+  aliases:
+  - apply job
+  - apply now
+  - ứng tuyển
+  - ung tuyen
+  - nộp cv
+  - nop cv
+  - hiring
+  - recruitment
+  compact_aliases: []
+  taxonomy_ids:
+  - category.jobs_recruitment
+  description: Generic hiring or application-interest concept.
+  related_phrases:
+  - candidate
+  - interview
+  - phỏng vấn
+  - phong van
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: concept.market_expansion
+  name: market expansion
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - market expansion
+  - expand market
+  - market entry
+  - mở rộng thị trường
+  - mo rong thi truong
+  - vào thị trường mới
+  - vao thi truong moi
+  compact_aliases: []
+  taxonomy_ids:
+  - category.market_expansion
+  description: Generic market-entry or expansion concept.
+  related_phrases:
+  - localization
+  - export
+  - dealer network
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: concept.service_center
+  name: service center
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - service center
+  - support center
+  - repair center
+  - trung tâm dịch vụ
+  - trung tam dich vu
+  - trung tâm bảo hành
+  - trung tam bao hanh
+  compact_aliases: []
+  taxonomy_ids:
+  - category.service_operations
+  description: Generic service or support-center concept.
+  related_phrases:
+  - after sales
+  - bảo dưỡng
+  - bao duong
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: concept.product_line
+  name: product line
+  entity_type: concept
+  entity_kind: concept
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - product line
+  - lineup
+  - model line
+  - dòng sản phẩm
+  - dong san pham
+  compact_aliases: []
+  taxonomy_ids:
+  - category.consumer_goods
+  - category.electronics
+  - category.automotive
+  description: Generic product-line or lineup concept.
+  related_phrases:
+  - variant
+  - trim
+  - model range
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: brand.sunhop
+  name: SunHop
+  entity_type: brand
+  entity_kind: entity
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - Sun Hop
+  compact_aliases: []
+  taxonomy_ids:
+  - category.consumer_goods
+  description: Example craft beer brand.
+  related_phrases: []
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+- id: product.sunhop_hazy24
+  name: SunHop Hazy24
+  entity_type: product
+  entity_kind: entity
+  knowledge_layer: domain
+  active_linking: true
+  target_eligible: true
+  aliases:
+  - Hazy24
+  - Hazy 24
+  - HZY-24
+  - SunHop Hazy 24
+  compact_aliases: []
+  taxonomy_ids:
+  - category.consumer_goods
+  description: Example beer product used for cross-domain tests.
+  related_phrases: []
+  domain_anchor_phrases: []
+  neighboring_entity_ids: []
+  neighboring_aspect_ids: []
+  anti_confusion_phrases: []
+  metadata: {}
+topics:
+- topic_key: launch
+  label: Product Launch and Rollout
+  description: Conversation about launches, openings, rollout timing, and early availability.
+  knowledge_layer: domain
+  topic_family: launch_rollout
+  main_path_policy: generic_fallback
+  seed_phrases:
+  - ra mắt
+  - ra mat
+  - launch
+  - rollout
+  - mở bán
+  - mo ban
+  - pre order
+  - now available
+  - release
+  - debut
+  negative_phrases:
+  - tuyển dụng
+  - tuyen dung
+  - hiring
+  domain_tags:
+  - beer_vn
+  excluded_domain_tags:
+  - facial_cleanser_vn
+  issue_centric: false
+  reportable: true
+  related_entity_ids: []
+  related_taxonomy_ids:
+  - category.consumer_goods
+  - category.automotive
+  - category.service_operations
+  - feature.availability
+  related_aspect_ids:
+  - availability
+  - delivery
+  - expansion
+  related_issue_ids:
+  - rollout_delay
+  - availability_problem
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - organization
+  - location
+  metadata: {}
+- topic_key: product_experience
+  label: Product Experience and Quality
+  description: Discussion of quality, design, comfort, usability, and overall product
+    experience.
+  knowledge_layer: domain
+  topic_family: product_experience
+  main_path_policy: generic_fallback
+  seed_phrases:
+  - chất lượng
+  - chat luong
+  - quality
+  - thiết kế
+  - thiet ke
+  - design
+  - trải nghiệm
+  - trai nghiem
+  - sử dụng
+  - su dung
+  - comfort
+  - nội thất
+  - noi that
+  - ngoại thất
+  - ngoai that
+  - hoàn thiện
+  - hoan thien
+  negative_phrases: []
+  domain_tags:
+  - beer_vn
+  excluded_domain_tags: []
+  issue_centric: false
+  reportable: true
+  related_entity_ids: []
+  related_taxonomy_ids:
+  - feature.quality
+  - feature.design
+  - feature.usability
+  - feature.durability
+  related_aspect_ids:
+  - quality
+  - design
+  - usability
+  - durability
+  related_issue_ids:
+  - product_defect
+  - usability_problem
+  compatible_entity_types:
+  - brand
+  - product
+  - product_line
+  - concept
+  metadata: {}
+- topic_key: pricing_and_value
+  label: Pricing and Value
+  description: Conversation about price, value for money, discounts, and financing.
+  knowledge_layer: domain
+  topic_family: pricing_value
+  main_path_policy: generic_fallback
+  seed_phrases:
+  - giá
+  - gia
+  - price
+  - mắc
+  - mac
+  - rẻ
+  - re
+  - value
+  - khuyến mãi
+  - khuyen mai
+  - voucher
+  - trả góp
+  - tra gop
+  - chi phí
+  - chi phi
+  - worth
+  negative_phrases: []
+  domain_tags:
+  - beer_vn
+  excluded_domain_tags:
+  - facial_cleanser_vn
+  issue_centric: false
+  reportable: true
+  related_entity_ids: []
+  related_taxonomy_ids:
+  - feature.price
+  - category.investment
+  related_aspect_ids:
+  - price
+  - trust
+  related_issue_ids:
+  - pricing_value_concern
+  - trust_concern
+  compatible_entity_types:
+  - brand
+  - product
+  - retailer
+  - organization
+  - concept
+  metadata: {}
+- topic_key: service_and_support
+  label: Service and Support
+  description: Conversation about after-sales support, repairs, warranty, and customer
+    service.
+  knowledge_layer: domain
+  topic_family: service_support
+  main_path_policy: generic_fallback
+  seed_phrases:
+  - bảo hành
+  - bao hanh
+  - warranty
+  - service center
+  - trung tâm dịch vụ
+  - trung tam dich vu
+  - chăm sóc khách hàng
+  - cham soc khach hang
+  - support
+  - sửa chữa
+  - sua chua
+  - phụ tùng
+  - phu tung
+  - bảo dưỡng
+  - bao duong
+  negative_phrases: []
+  domain_tags:
+  - beer_vn
+  excluded_domain_tags: []
+  issue_centric: false
+  reportable: true
+  related_entity_ids: []
+  related_taxonomy_ids:
+  - feature.customer_service
+  - feature.delivery
+  - category.service_operations
+  related_aspect_ids:
+  - customer_service
+  - delivery
+  - trust
+  - charging
+  related_issue_ids:
+  - service_problem
+  - delivery_problem
+  - trust_concern
+  - availability_problem
+  compatible_entity_types:
+  - brand
+  - organization
+  - retailer
+  - facility
+  - concept
+  metadata: {}
+alias_contributions:
+- canonical_entity_id: product.sunhop_hazy24
+  alias: SunHop Hazy
+  entity_type: product
+  source: example_overlay
+  provenance: {}
+noise_terms:
+- term: haha
+  reason: low_information_social_reaction
+  source: overlay
+  provenance: {}
+- term: hehe
+  reason: low_information_social_reaction
+  source: overlay
+  provenance: {}
+- term: huhu
+  reason: low_information_social_reaction
+  source: overlay
+  provenance: {}
+- term: kk
+  reason: low_information_social_reaction
+  source: overlay
+  provenance: {}
+activation:
+  signals:
+  - phrase: manufacturing facility
+    weight: 1.0
+  - phrase: factory
+    weight: 1.0
+  - phrase: plant
+    weight: 1.0
+  - phrase: manufacturing facility
+    weight: 1.0
+  - phrase: production facility
+    weight: 1.0
+  - phrase: nhà máy
+    weight: 1.0
+  - phrase: nha may
+    weight: 1.0
+  - phrase: xưởng sản xuất
+    weight: 1.0
+  - phrase: xuong san xuat
+    weight: 1.0
+  - phrase: nhamay
+    weight: 1.0
+domain_id: beer_vn
+loaded_overlays: []

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smap-core"
+version = "1.0.0"
+description = "Trimmed SMAP core pipeline handoff for service wrapping"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "OpenAI Codex" }]
+dependencies = [
+  "alembic>=1.14.1",
+  "duckdb>=1.2.2",
+  "polars>=1.26.0",
+  "pydantic-settings>=2.8.1",
+  "pydantic>=2.10.6",
+  "pyyaml>=6.0.2",
+  "rapidfuzz>=3.12.2",
+  "sqlalchemy>=2.0.38",
+]
+
+[project.optional-dependencies]
+intelligence = [
+  "fasttext-wheel>=0.9.2",
+  "torch>=2.6.0",
+  "transformers>=4.49.0",
+  "sentencepiece>=0.2.0",
+  "faiss-cpu>=1.9.0",
+]
+
+[project.scripts]
+smap = "smap.cli.app:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
