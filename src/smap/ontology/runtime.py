@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Literal
 from pydantic import BaseModel, Field
 from smap.canonicalization.alias import AliasRegistry, normalize_alias
+from smap.contracts.uap import content_keywords, content_title
 from smap.ontology.loader import load_ontology
 DomainSelectionMode = Literal['explicit', 'corpus_auto', 'fallback_default']
 
@@ -61,7 +62,7 @@ def _fallback_domain_path(settings):
     candidate_paths = settings.available_domain_ontology_paths()
     if settings.domain_ontology_path is not None and settings.domain_ontology_path.exists():
         return settings.domain_ontology_path.resolve()
-    preferred = ['ev_vn.yaml', 'facial_cleanser_vn.yaml', 'cosmetics_vn.yaml', 'beer_vn.yaml']
+    preferred = ['cosmetics_vn.yaml', 'beer_vn.yaml', 'blockchain_vn.yaml']
     for name in preferred:
         candidate = settings.domain_ontology_dir / name
         if candidate.exists():
@@ -151,7 +152,7 @@ def _registry_alias_terms(registry):
 
 def _record_activation_text(record):
     hashtags = getattr(record.content, 'hashtags', None) or []
-    keywords = getattr(record.content, 'tiktok_keywords', None) or []
-    summary_title = getattr(record.content, 'summary_title', None) or ''
+    keywords = content_keywords(record)
+    summary_title = content_title(record) or ''
     parts = [record.text, summary_title, *[str(hashtag) for hashtag in hashtags if hashtag], *[str(keyword) for keyword in keywords if keyword]]
     return normalize_alias(' '.join((part for part in parts if part)))

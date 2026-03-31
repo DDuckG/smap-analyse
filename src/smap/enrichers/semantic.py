@@ -65,6 +65,11 @@ class SemanticInferenceEnricher:
         self._taxonomy_rerank_cache: dict[tuple[str, tuple[str, ...]], dict[str, float]] = {}
         self._issue_mode_rerank_cache: dict[tuple[str, tuple[str, ...]], dict[EvidenceMode, float]] = {}
         self._pairwise_similarity_cache: dict[tuple[str, ...], list[list[float]]] = {}
+        self._prototype_query_vector_cache = {}
+        self._aspect_candidate_cache = {}
+        self._issue_candidate_cache = {}
+        self._aspect_bundle_cache = {}
+        self._issue_bundle_cache = {}
 
     def enrich(self, mentions, contexts, entity_facts):
         self._mapping_candidate_cache = {}
@@ -72,6 +77,9 @@ class SemanticInferenceEnricher:
         self._taxonomy_rerank_cache = {}
         self._issue_mode_rerank_cache = {}
         self._pairwise_similarity_cache = {}
+        self._prototype_query_vector_cache = {}
+        self._aspect_candidate_cache = {}
+        self._issue_candidate_cache = {}
         context_map = {context.mention_id: context for context in contexts}
         mention_map = {mention.mention_id: mention for mention in mentions}
         entities_by_mention: dict[str, list[EntityFact]] = defaultdict(list)
@@ -114,8 +122,8 @@ class SemanticInferenceEnricher:
         aspect_segment_hypotheses: list[AspectOpinionHypothesis] = []
         issue_segment_hypotheses: list[IssueSignalHypothesis] = []
         segment_sentiments: list[tuple[SemanticSegment, float, list[SemanticAnchor], list[str], bool]] = []
+        routing_mode = self._semantic_routing_mode(mention)
         for segment in segments:
-            routing_mode = self._semantic_routing_mode(mention)
             anchors = extract_lexical_anchors(segment, aspect_seeds=self.aspect_seed_map, issue_seeds=self.issue_seed_map)
             anchors.extend(self._target_anchors_for_segment(mention=mention, segment=segment, targets=explicit_targets))
             if self._segment_is_low_signal(segment, anchors):
@@ -410,6 +418,48 @@ class SemanticInferenceEnricher:
             return segment.normalized_text
         return normalize_alias(segment.text[relative_start:relative_end]) or segment.normalized_text
 
+    def _compatible_aspect_bundles(self, entity_type):
+        if self.prototype_registry is None:
+            return ()
+        cache_key = entity_type or ''
+        cached = self._aspect_bundle_cache.get(cache_key)
+        if cached is not None:
+            return cached
+        bundles = tuple((bundle for bundle in self.prototype_registry.aspects.values() if not bundle.compatible_entity_types or cache_key in bundle.compatible_entity_types))
+        self._aspect_bundle_cache[cache_key] = bundles
+        return bundles
+
+    def _compatible_issue_bundles(self, entity_type):
+        if self.prototype_registry is None:
+            return ()
+        cache_key = entity_type or ''
+        cached = self._issue_bundle_cache.get(cache_key)
+        if cached is not None:
+            return cached
+        bundles = tuple((bundle for bundle in self.prototype_registry.issues.values() if not bundle.compatible_entity_types or cache_key in bundle.compatible_entity_types))
+        self._issue_bundle_cache[cache_key] = bundles
+        return bundles
+
+    def _query_vector(self, query_text):
+        if self.embedding_provider is None:
+            return None
+        normalized_query = normalize_alias(query_text) or query_text.casefold().strip()
+        if not normalized_query:
+            return None
+        cached = self._prototype_query_vector_cache.get(normalized_query)
+        if cached is not None:
+            return cached
+        vectors = self.embedding_provider.embed_texts([normalized_query], purpose=EmbeddingPurpose.LINKING)
+        if not vectors:
+            return None
+        self._prototype_query_vector_cache[normalized_query] = vectors[0]
+        return vectors[0]
+
+    def _prototype_vector_similarity(self, query_vector, prototype_vector):
+        if query_vector is None or prototype_vector is None:
+            return 0.0
+        return max(sum((a * b for a, b in zip(query_vector, prototype_vector, strict=True))), 0.0)
+
     def _prototype_similarity(self, query_text, prototype_text):
         if self.embedding_provider is None:
             return 0.0
@@ -434,30 +484,46 @@ class SemanticInferenceEnricher:
     def _rank_aspect_candidates(self, *, window_text, target):
         if self.prototype_registry is None:
             return []
+        cache_key = (normalize_alias(window_text) or window_text.casefold().strip(), target.entity_type or '')
+        cached = self._aspect_candidate_cache.get(cache_key)
+        if cached is not None:
+            return cached
+        query_text = cache_key[0] or window_text
+        query_vector = self._query_vector(query_text)
         ranked: list[PrototypeCandidateScore] = []
-        for aspect in self.prototype_registry.aspects.values():
-            if aspect.compatible_entity_types and (target.entity_type or '') not in aspect.compatible_entity_types:
-                continue
-            semantic = self._prototype_similarity(window_text, aspect.prototype_text)
-            lexical = self._lexical_seed_support(window_text, seed_phrases=aspect.seed_phrases, negative_phrases=aspect.negative_phrases)
+        for aspect in self._compatible_aspect_bundles(target.entity_type):
+            semantic = self._prototype_vector_similarity(query_vector, aspect.vector)
+            if semantic <= 0.0 and (query_vector is None or aspect.vector is None):
+                semantic = self._prototype_similarity(query_text, aspect.prototype_text)
+            lexical = self._lexical_seed_support(query_text, seed_phrases=aspect.seed_phrases, negative_phrases=aspect.negative_phrases)
             score = round(semantic * 0.34 + lexical * 0.46 + max(semantic, lexical) * 0.2, 6)
             if score >= 0.22:
                 ranked.append(PrototypeCandidateScore(label=aspect.aspect_id, total_score=score, lexical_score=round(lexical, 6), semantic_score=round(semantic, 6)))
-        return sorted(ranked, key=lambda item: (-item.total_score, item.label))[:4]
+        result = sorted(ranked, key=lambda item: (-item.total_score, item.label))[:4]
+        self._aspect_candidate_cache[cache_key] = result
+        return result
 
     def _rank_issue_candidates(self, *, window_text, target):
         if self.prototype_registry is None:
             return []
+        cache_key = (normalize_alias(window_text) or window_text.casefold().strip(), target.entity_type or '')
+        cached = self._issue_candidate_cache.get(cache_key)
+        if cached is not None:
+            return cached
+        query_text = cache_key[0] or window_text
+        query_vector = self._query_vector(query_text)
         ranked: list[PrototypeCandidateScore] = []
-        for issue in self.prototype_registry.issues.values():
-            if issue.compatible_entity_types and (target.entity_type or '') not in issue.compatible_entity_types:
-                continue
-            semantic = self._prototype_similarity(window_text, issue.prototype_text)
-            lexical = self._lexical_seed_support(window_text, seed_phrases=issue.seed_phrases, negative_phrases=issue.negative_phrases)
+        for issue in self._compatible_issue_bundles(target.entity_type):
+            semantic = self._prototype_vector_similarity(query_vector, issue.vector)
+            if semantic <= 0.0 and (query_vector is None or issue.vector is None):
+                semantic = self._prototype_similarity(query_text, issue.prototype_text)
+            lexical = self._lexical_seed_support(query_text, seed_phrases=issue.seed_phrases, negative_phrases=issue.negative_phrases)
             score = round(semantic * 0.48 + lexical * 0.32 + max(semantic, lexical) * 0.2, 6)
             if score >= 0.22:
                 ranked.append(PrototypeCandidateScore(label=issue.issue_id, total_score=score, lexical_score=round(lexical, 6), semantic_score=round(semantic, 6)))
-        return sorted(ranked, key=lambda item: (-item.total_score, item.label))[:4]
+        result = sorted(ranked, key=lambda item: (-item.total_score, item.label))[:4]
+        self._issue_candidate_cache[cache_key] = result
+        return result
 
     def _related_issues_for_aspect(self, aspect_id):
         if self.prototype_registry is None:
@@ -706,6 +772,8 @@ class SemanticInferenceEnricher:
 
     def _rerank_issue_modes(self, query_text, hypotheses):
         if self.reranker_provider is None:
+            return {}
+        if len(hypotheses) <= 1 or len({item.evidence_mode for item in hypotheses}) <= 1:
             return {}
         cache_key = (query_text, tuple(sorted((item.evidence_mode.value for item in hypotheses))))
         cached = self._issue_mode_rerank_cache.get(cache_key)

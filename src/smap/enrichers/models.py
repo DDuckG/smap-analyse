@@ -1,14 +1,19 @@
 from __future__ import annotations
+
 from datetime import datetime
 from typing import Literal
+
 from pydantic import BaseModel, Field
+
 from smap.canonicalization.models import DiscoveryMethod
 from smap.core.types import utc_now
 from smap.enrichers.semantic_models import EvidenceMode, EvidenceScope, EvidenceSpan, ScoreComponent
-SentimentLabel = Literal['positive', 'negative', 'neutral', 'mixed']
-StanceLabel = Literal['support', 'oppose', 'question', 'neutral']
-IssueSeverity = Literal['low', 'medium', 'high', 'critical_like_proxy']
-InfluenceTier = Literal['nano', 'micro', 'mid', 'macro']
+
+SentimentLabel = Literal["positive", "negative", "neutral", "mixed"]
+StanceLabel = Literal["support", "oppose", "question", "neutral"]
+IssueSeverity = Literal["low", "medium", "high", "critical_like_proxy"]
+InfluenceTier = Literal["nano", "micro", "mid", "macro"]
+
 
 class FactProvenance(BaseModel):
     source_uap_id: str
@@ -19,6 +24,7 @@ class FactProvenance(BaseModel):
     evidence_span: tuple[int, int] | None = None
     generated_at: datetime = Field(default_factory=utc_now)
 
+
 class EntityFact(BaseModel):
     mention_id: str
     source_uap_id: str
@@ -28,9 +34,9 @@ class EntityFact(BaseModel):
     entity_type: str | None = None
     confidence: float
     matched_by: str
-    resolution_kind: Literal['canonical_entity', 'concept', 'unresolved_candidate'] = 'unresolved_candidate'
-    resolved_entity_kind: Literal['entity', 'concept'] | None = None
-    knowledge_layer: Literal['base', 'domain', 'domain_overlay', 'review_overlay', 'batch_local_candidate'] | None = None
+    resolution_kind: Literal["canonical_entity", "concept", "unresolved_candidate"] = "unresolved_candidate"
+    resolved_entity_kind: Literal["entity", "concept"] | None = None
+    knowledge_layer: Literal["base", "domain", "domain_overlay", "review_overlay", "batch_local_candidate"] | None = None
     target_eligible: bool = False
     unresolved_cluster_id: str | None = None
     unresolved_cluster_size: int = 0
@@ -40,19 +46,21 @@ class EntityFact(BaseModel):
     discovered_by: list[DiscoveryMethod] = Field(default_factory=list)
     provenance: FactProvenance
 
+
 class EntityCandidateClusterFact(BaseModel):
     cluster_id: str
     normalized_surface: str
     representative_surface: str
-    knowledge_layer: Literal['batch_local_candidate'] = 'batch_local_candidate'
+    knowledge_layer: Literal["batch_local_candidate"] = "batch_local_candidate"
     entity_type_hint: str | None = None
     mention_count: int
     source_languages: list[str] = Field(default_factory=list)
     discovered_by: list[DiscoveryMethod] = Field(default_factory=list)
     representative_mention_ids: list[str] = Field(default_factory=list)
     candidate_canonical_ids: list[str] = Field(default_factory=list)
-    promotion_state: Literal['reviewable', 'promotable', 'promoted'] = 'reviewable'
+    promotion_state: Literal["reviewable", "promotable", "promoted"] = "reviewable"
     provenance: FactProvenance
+
 
 class KeywordFact(BaseModel):
     mention_id: str
@@ -60,6 +68,7 @@ class KeywordFact(BaseModel):
     keyphrase: str
     confidence: float
     provenance: FactProvenance
+
 
 class TopicFact(BaseModel):
     mention_id: str
@@ -70,7 +79,7 @@ class TopicFact(BaseModel):
     effective_topic_label: str | None = None
     reporting_topic_key: str | None = None
     reporting_topic_label: str | None = None
-    reporting_status: Literal['reportable', 'discovery_only', 'suppressed'] = 'reportable'
+    reporting_status: Literal["reportable", "discovery_only", "suppressed"] = "reportable"
     label_source: str | None = None
     label_confidence: float | None = None
     label_health_score: float | None = None
@@ -81,15 +90,17 @@ class TopicFact(BaseModel):
     segment_id: str | None = None
     provenance: FactProvenance
 
+
 class TopicEvidencePhrase(BaseModel):
     phrase: str
-    role: Literal['canonical', 'supporting', 'issue_support', 'aspect_support', 'debug_only']
+    role: Literal["entity_anchor", "canonical", "supporting", "issue_support", "aspect_support", "debug_only"]
     source_types: list[str] = Field(default_factory=list)
     purity_score: float
     readability_score: float
     semantic_score: float | None = None
     support_score: float | None = None
     provenance_flags: list[str] = Field(default_factory=list)
+
 
 class TopicArtifactFact(BaseModel):
     topic_key: str
@@ -106,6 +117,7 @@ class TopicArtifactFact(BaseModel):
     topic_size: int
     top_terms: list[str] = Field(default_factory=list)
     salient_terms: list[str] = Field(default_factory=list)
+    entity_anchor_phrases: list[str] = Field(default_factory=list)
     canonical_evidence_phrases: list[str] = Field(default_factory=list)
     canonical_evidence_details: list[TopicEvidencePhrase] = Field(default_factory=list)
     supporting_phrases: list[str] = Field(default_factory=list)
@@ -117,7 +129,7 @@ class TopicArtifactFact(BaseModel):
     issue_profile: list[str] = Field(default_factory=list)
     representative_document_ids: list[str] = Field(default_factory=list)
     representative_texts: list[str] = Field(default_factory=list)
-    artifact_version: str = 'topic-artifact-v5'
+    artifact_version: str = "topic-artifact-v5"
     topic_signature: str | None = None
     topic_term_signature: str | None = None
     topic_profile_signature: str | None = None
@@ -130,7 +142,7 @@ class TopicArtifactFact(BaseModel):
     usefulness_score: float | None = None
     reportability_score: float | None = None
     reportability_reason_flags: list[str] = Field(default_factory=list)
-    reporting_status: Literal['reportable', 'discovery_only', 'suppressed'] = 'reportable'
+    reporting_status: Literal["reportable", "discovery_only", "suppressed"] = "reportable"
     chatter_burden: float | None = None
     reaction_only_burden: float | None = None
     low_information_burden: float | None = None
@@ -156,13 +168,14 @@ class TopicArtifactFact(BaseModel):
     time_window_end: str | None = None
     provenance: FactProvenance
 
+
 class SentimentFact(BaseModel):
     mention_id: str
     source_uap_id: str
     sentiment: SentimentLabel
     score: float
     confidence: float
-    semantic_routing: Literal['semantic_lite', 'semantic_full'] = 'semantic_full'
+    semantic_routing: Literal["semantic_lite", "semantic_full"] = "semantic_full"
     sentiment_confidence: float | None = None
     corroboration_confidence: float | None = None
     evidence_spans: list[EvidenceSpan] = Field(default_factory=list)
@@ -170,6 +183,7 @@ class SentimentFact(BaseModel):
     score_components: list[ScoreComponent] = Field(default_factory=list)
     segment_ids: list[str] = Field(default_factory=list)
     provenance: FactProvenance
+
 
 class TargetSentimentFact(BaseModel):
     mention_id: str
@@ -179,12 +193,12 @@ class TargetSentimentFact(BaseModel):
     canonical_entity_id: str | None = None
     concept_entity_id: str | None = None
     unresolved_cluster_id: str | None = None
-    target_kind: Literal['canonical_entity', 'concept', 'unresolved_cluster', 'surface'] = 'surface'
+    target_kind: Literal["canonical_entity", "concept", "unresolved_cluster", "surface"] = "surface"
     entity_type: str | None = None
     sentiment: SentimentLabel
     score: float
     confidence: float
-    semantic_routing: Literal['semantic_lite', 'semantic_full'] = 'semantic_full'
+    semantic_routing: Literal["semantic_lite", "semantic_full"] = "semantic_full"
     sentiment_confidence: float | None = None
     target_grounding_confidence: float | None = None
     corroboration_confidence: float | None = None
@@ -197,6 +211,7 @@ class TargetSentimentFact(BaseModel):
     segment_ids: list[str] = Field(default_factory=list)
     provenance: FactProvenance
 
+
 class StanceFact(BaseModel):
     mention_id: str
     source_uap_id: str
@@ -204,12 +219,14 @@ class StanceFact(BaseModel):
     confidence: float
     provenance: FactProvenance
 
+
 class IntentFact(BaseModel):
     mention_id: str
     source_uap_id: str
     intent: str
     confidence: float
     provenance: FactProvenance
+
 
 class AspectOpinionFact(BaseModel):
     mention_id: str
@@ -222,8 +239,8 @@ class AspectOpinionFact(BaseModel):
     canonical_entity_id: str | None = None
     concept_entity_id: str | None = None
     unresolved_cluster_id: str | None = None
-    target_kind: Literal['canonical_entity', 'concept', 'unresolved_cluster', 'surface'] = 'surface'
-    semantic_routing: Literal['semantic_lite', 'semantic_full'] = 'semantic_full'
+    target_kind: Literal["canonical_entity", "concept", "unresolved_cluster", "surface"] = "surface"
+    semantic_routing: Literal["semantic_lite", "semantic_full"] = "semantic_full"
     sentiment_confidence: float | None = None
     target_grounding_confidence: float | None = None
     corroboration_confidence: float | None = None
@@ -236,6 +253,7 @@ class AspectOpinionFact(BaseModel):
     segment_id: str | None = None
     provenance: FactProvenance
 
+
 class IssueSignalFact(BaseModel):
     mention_id: str
     source_uap_id: str
@@ -247,8 +265,8 @@ class IssueSignalFact(BaseModel):
     canonical_entity_id: str | None = None
     concept_entity_id: str | None = None
     unresolved_cluster_id: str | None = None
-    target_kind: Literal['canonical_entity', 'concept', 'unresolved_cluster', 'surface'] = 'surface'
-    semantic_routing: Literal['semantic_lite', 'semantic_full'] = 'semantic_full'
+    target_kind: Literal["canonical_entity", "concept", "unresolved_cluster", "surface"] = "surface"
+    semantic_routing: Literal["semantic_lite", "semantic_full"] = "semantic_full"
     issue_evidence_confidence: float | None = None
     target_grounding_confidence: float | None = None
     corroboration_confidence: float | None = None
@@ -262,6 +280,7 @@ class IssueSignalFact(BaseModel):
     segment_id: str | None = None
     provenance: FactProvenance
 
+
 class SourceInfluenceFact(BaseModel):
     mention_id: str
     source_uap_id: str
@@ -271,6 +290,7 @@ class SourceInfluenceFact(BaseModel):
     engagement_score: float
     confidence: float
     provenance: FactProvenance
+
 
 class EnrichmentBundle(BaseModel):
     entity_facts: list[EntityFact] = Field(default_factory=list)
