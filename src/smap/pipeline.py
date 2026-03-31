@@ -19,7 +19,6 @@ from smap.ingestion.models import IngestedBatchBundle
 from smap.ingestion.service import ingest_batch
 from smap.insights.generator import generate_insights
 from smap.insights.models import InsightCard
-from smap.ml.heads import load_binary_linear_head, load_multiclass_linear_head
 from smap.ontology.alignment import collect_alignment_errors
 from smap.ontology.prototypes import PrototypeRegistry
 from smap.ontology.runtime import load_runtime_ontology
@@ -65,9 +64,9 @@ def _build_enricher_service(settings, ontology, *, runtime=None, other_domain_al
         set_phrase_lexicon(prototype_registry.phrase_lexicon)
     alias_registry = AliasRegistry.from_ontology(ontology)
     feedback_store = FeedbackStore(settings)
-    entity_engine = CanonicalizationEngine(alias_registry=alias_registry, embedding_provider=runtime.embedding_provider, prototype_registry=prototype_registry, vector_index=runtime.vector_index, mention_worthiness_head=load_binary_linear_head(settings.entity_mention_head_path), entity_link_head=load_binary_linear_head(settings.entity_link_head_path), embedding_rerank_enabled=settings.intelligence.entity_embedding_rerank_enabled)
+    entity_engine = CanonicalizationEngine(alias_registry=alias_registry, embedding_provider=runtime.embedding_provider, prototype_registry=prototype_registry, vector_index=runtime.vector_index, embedding_rerank_enabled=settings.intelligence.entity_embedding_rerank_enabled)
     entity_enricher = EntityExtractionEnricher(entity_engine, ontology_registry=ontology, other_domain_aliases=other_domain_aliases or frozenset(), ner_provider_builder=lambda scoped_alias_registry: build_ner_providers_with_embedding(settings, scoped_alias_registry, embedding_provider=runtime.embedding_provider))
-    topic_enricher = TopicCandidateEnricher(runtime.topic_provider, artifact_history_dir=settings.topic_artifacts_dir, reviewed_topic_lineage=feedback_store.load_topic_lineage(), embedding_provider=runtime.embedding_provider, prototype_registry=prototype_registry, artifact_role_head=load_multiclass_linear_head(settings.topic_artifact_role_head_path), lineage_head=load_binary_linear_head(settings.topic_lineage_head_path))
+    topic_enricher = TopicCandidateEnricher(runtime.topic_provider, artifact_history_dir=settings.topic_artifacts_dir, reviewed_topic_lineage=feedback_store.load_topic_lineage(), embedding_provider=runtime.embedding_provider, prototype_registry=prototype_registry)
     semantic_enricher = SemanticInferenceEnricher(ontology_registry=ontology, prototype_registry=prototype_registry, taxonomy_mapping_provider=runtime.taxonomy_mapping_provider if settings.intelligence.semantic_assist_enabled else None, reranker_provider=runtime.reranker_provider if settings.intelligence.semantic_hypothesis_rerank_enabled else None, embedding_provider=runtime.embedding_provider, promoted_semantic_knowledge=feedback_store.load_promoted_semantic_knowledge(), semantic_assist_enabled=settings.intelligence.semantic_assist_enabled, semantic_hypothesis_rerank_enabled=settings.intelligence.semantic_hypothesis_rerank_enabled, semantic_corroboration_enabled=settings.intelligence.semantic_corroboration_enabled)
     return (EnricherService(entity_enricher=entity_enricher, topic_enricher=topic_enricher, semantic_enricher=semantic_enricher), runtime)
 

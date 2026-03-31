@@ -83,7 +83,6 @@ class Settings(BaseSettings):
     analytics_duckdb: Path = Field(default=Path('./var/analytics.duckdb'))
     domain_ontology_dir: Path = Field(default=Path('./configs/domains'))
     domain_ontology_path: Path | None = None
-    trained_head_dir: Path = Field(default=Path('./configs/ml'))
     intelligence: IntelligenceSettings = Field(default_factory=IntelligenceSettings)
     analytics: AnalyticsSettings = Field(default_factory=AnalyticsSettings)
 
@@ -128,22 +127,6 @@ class Settings(BaseSettings):
         return self.intelligence_dir / self.intelligence.topics.artifact_dirname
 
     @property
-    def entity_mention_head_path(self):
-        return self.trained_head_dir / 'entity_mention_head.json'
-
-    @property
-    def entity_link_head_path(self):
-        return self.trained_head_dir / 'entity_link_head.json'
-
-    @property
-    def topic_artifact_role_head_path(self):
-        return self.trained_head_dir / 'topic_artifact_role_head.json'
-
-    @property
-    def topic_lineage_head_path(self):
-        return self.trained_head_dir / 'topic_lineage_head.json'
-
-    @property
     def feedback_dir(self):
         return self.intelligence_dir / 'feedback'
 
@@ -173,7 +156,7 @@ class Settings(BaseSettings):
 
     def ensure_directories(self):
         db_path = self.sqlite_db_path
-        for path in (self.data_dir, self.bronze_dir, self.silver_dir, self.gold_dir, self.reports_dir, self.insights_dir, self.intelligence_dir, self.model_dir, self.embedding_cache_dir, self.vector_index_dir, self.topic_artifacts_dir, self.feedback_dir, self.trained_head_dir, self.analytics_duckdb, self.intelligence.language_id.fasttext_model_path, db_path if db_path is not None else Path('.')):
+        for path in (self.data_dir, self.bronze_dir, self.silver_dir, self.gold_dir, self.reports_dir, self.insights_dir, self.intelligence_dir, self.model_dir, self.embedding_cache_dir, self.vector_index_dir, self.topic_artifacts_dir, self.feedback_dir, self.analytics_duckdb, self.intelligence.language_id.fasttext_model_path, db_path if db_path is not None else Path('.')):
             if path.suffix:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 continue

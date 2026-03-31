@@ -1,7 +1,11 @@
 from __future__ import annotations
+
 from datetime import datetime
+
 from pydantic import BaseModel, Field
+
 from smap.contracts.uap import Platform, UAPType
+
 
 class MentionRecord(BaseModel):
     mention_id: str
@@ -25,15 +29,15 @@ class MentionRecord(BaseModel):
     language_provider: str | None = None
     language_provider_version: str | None = None
     language_model_id: str | None = None
-    language_source: str = 'inferred'
+    language_source: str = "inferred"
     language_metadata: dict[str, str | int | float | bool | None] = Field(default_factory=dict)
     language_supported: bool = True
     language_rejection_reason: str | None = None
-    text_quality_label: str = 'normal'
+    text_quality_label: str = "normal"
     text_quality_flags: list[str] = Field(default_factory=list)
     text_quality_score: float = 1.0
     mixed_language_uncertain: bool = False
-    semantic_route_hint: str = 'semantic_full'
+    semantic_route_hint: str = "semantic_full"
     hashtags: list[str] = Field(default_factory=list)
     keywords: list[str] = Field(default_factory=list)
     urls: list[str] = Field(default_factory=list)
@@ -50,18 +54,22 @@ class MentionRecord(BaseModel):
     author_suspicious: bool = False
     suspicion_reason_codes: list[str] = Field(default_factory=list)
     quality_weight: float = 1.0
+    title: str | None = None
     summary_title: str | None = None
     source_url: str | None = None
     posted_at: datetime | None = None
+    updated_at: datetime | None = None
     ingested_at: datetime | None = None
     likes: int | None = None
     comments_count: int | None = None
     reply_count: int | None = None
     shares: int | None = None
     views: int | None = None
+    saves: int | None = None
     bookmarks: int | None = None
     sort_score: float | None = None
     is_shop_video: bool | None = None
+
 
 class NormalizationBatch(BaseModel):
     mentions: list[MentionRecord]

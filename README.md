@@ -1,36 +1,125 @@
-# SMAP v1
+# SMAP Clean Runtime
 
-Bản này tập trung vào một việc chính:
+Clean runtime source for UAP-native social listening with one domain ontology per run.
 
-- nhận đầu vào UAP (Hỗ trợ cả `.jsonl`, `.zip`, hoặc thư mục batch)
-- chạy full pipeline intelligence
-- ghi đầu ra ổn định ra `var/` để team khác có thể wrap thành service
+Bundled domain packs:
 
-## Yêu cầu môi trường
+- `configs/domains/cosmetics_vn.yaml`
+- `configs/domains/beer_vn.yaml`
+- `configs/domains/blockchain_vn.yaml`
+
+## Environment
 
 - Python `3.12`
-- Windows / PowerShell hoặc môi trường tương đương
-- SQLite hoạt động bình thường
-- Có thể tải model từ Hugging Face ở lần chạy đầu tiên, hoặc đã có cache sẵn
-- Có model fastText LID `lid.176.ftz`
+- Windows `cmd.exe`
+- Local SQLite support
+- Internet access on first Hugging Face model download, or a warm local cache
 
-## Cài đặt mới từ đầu
+## Fresh Setup
 
-Chạy tại thư mục repo:
+Run from the repo root:
 
-```powershell
+```cmd
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.venv\Scripts\activate
 python -m pip install --upgrade pip setuptools wheel
-python -m pip install -e ".[intelligence]"
-python -m alembic upgrade head
-Invoke-WebRequest
-  -Uri "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz"
-  -OutFile ".\var\data\models\lid.176.ftz"
+python -m pip install -e .[intelligence]
+mkdir var
+mkdir var\data
+mkdir var\data\models
+mkdir var\data\reports
+mkdir var\data\bronze
+mkdir var\data\silver
+mkdir var\data\gold
+mkdir var\data\insights
+curl.exe -L "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz" -o var\data\models\lid.176.ftz
+smap db-upgrade
 ```
 
-## Chạy pipeline
+## fastText LID Model
 
+Expected path:
+
+```cmd
+var\data\models\lid.176.ftz
 ```
-smap run-pipeline .\path\to\input.zip --domain-ontology .\configs\domains\facial_cleanser_vn.yaml --output-json .\var\data\reports\pipeline_result.json
+
+Download command:
+
+```cmd
+curl.exe -L "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz" -o var\data\models\lid.176.ftz
 ```
+
+Quick check:
+
+```cmd
+dir var\data\models\lid.176.ftz
+```
+
+Optional override:
+
+```cmd
+set SMAP_INTELLIGENCE__LANGUAGE_ID__FASTTEXT_MODEL_PATH=.\var\data\models\lid.176.ftz
+```
+
+## Main Commands
+
+Database upgrade:
+
+```cmd
+smap db-upgrade
+```
+
+Doctor:
+
+```cmd
+smap doctor
+```
+
+Validate a batch:
+
+```cmd
+smap validate-batch C:\path\to\input.zip
+```
+
+Run cosmetics:
+
+```cmd
+smap run-pipeline C:\path\to\input.zip --domain-ontology .\configs\domains\cosmetics_vn.yaml
+```
+
+Run beer:
+
+```cmd
+smap run-pipeline C:\path\to\input.zip --domain-ontology .\configs\domains\beer_vn.yaml
+```
+
+Run blockchain:
+
+```cmd
+smap run-pipeline C:\path\to\input.zip --domain-ontology .\configs\domains\blockchain_vn.yaml
+```
+
+Write pipeline output to JSON:
+
+```cmd
+smap run-pipeline C:\path\to\input.zip --domain-ontology .\configs\domains\beer_vn.yaml --output-json .\var\data\reports\pipeline_result.json
+```
+
+## Minimal Sanity Checks
+
+```cmd
+smap doctor
+smap db-upgrade
+smap validate-batch C:\path\to\input.zip
+```
+
+```cmd
+smap run-pipeline C:\path\to\input.zip --domain-ontology .\configs\domains\cosmetics_vn.yaml --output-json .\var\data\reports\sanity_cosmetics.json
+```
+
+## Notes
+
+- The runtime is pretrained-only. No training or fine-tuning workflow is included here.
+- The runtime writes outputs under `var\`.
+- ZIP batch ingestion ignores `__MACOSX` and AppleDouble junk entries.

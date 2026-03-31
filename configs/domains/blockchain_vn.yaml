@@ -1,0 +1,584 @@
+metadata:
+  name: blockchain-vn
+  version: "2026.03.30-domain-pack"
+  description: Vietnam blockchain and crypto domain ontology for chains, wallets, DeFi, exchanges, safety, and compliance discourse.
+domain_id: blockchain_vn
+entity_types:
+  - brand
+  - product
+  - organization
+  - retailer
+  - person
+  - location
+  - facility
+  - concept
+taxonomy_nodes:
+  - id: category.finance
+    label: Finance
+    node_type: category
+  - id: category.blockchain
+    label: Blockchain
+    node_type: category
+  - id: category.defi
+    label: DeFi
+    node_type: category
+  - id: category.exchange
+    label: Exchange
+    node_type: category
+  - id: category.wallet
+    label: Wallet
+    node_type: category
+  - id: category.onchain_tools
+    label: Onchain Tools
+    node_type: category
+  - id: category.security
+    label: Security
+    node_type: category
+  - id: category.compliance
+    label: Compliance
+    node_type: category
+  - id: feature.security
+    label: Security
+    node_type: feature
+  - id: feature.usability
+    label: Usability
+    node_type: feature
+  - id: feature.fees
+    label: Fees
+    node_type: feature
+  - id: feature.speed
+    label: Speed
+    node_type: feature
+  - id: feature.decentralization
+    label: Decentralization
+    node_type: feature
+  - id: feature.compliance
+    label: Compliance
+    node_type: feature
+  - id: feature.liquidity
+    label: Liquidity
+    node_type: feature
+  - id: feature.interoperability
+    label: Interoperability
+    node_type: feature
+  - id: feature.rewards
+    label: Rewards
+    node_type: feature
+aspect_categories:
+  - id: security_safety
+    label: Security and Safety
+    description: Wallet safety, contract safety, and operational security.
+    seed_phrases: ["bao mat", "security", "safe", "wallet safety", "drain wallet", "secure"]
+    compatible_entity_types: ["brand", "product", "organization", "concept"]
+    linked_topic_keys: ["blockchain_scam_phishing_and_wallet_safety", "blockchain_wallet_setup_and_recovery"]
+    related_issue_ids: ["phishing_wallet_drain", "rugpull_scam_risk", "wallet_recovery_problem", "smart_contract_bug"]
+  - id: usability_onboarding
+    label: Usability and Onboarding
+    description: Ease of setup, onboarding, and user flow.
+    seed_phrases: ["de dung", "usability", "setup", "wallet setup", "new user", "onboarding"]
+    compatible_entity_types: ["product", "organization", "concept"]
+    linked_topic_keys: ["blockchain_basics_and_explainers", "blockchain_wallet_setup_and_recovery", "blockchain_exchange_kyc_and_offramp"]
+  - id: fees_gas
+    label: Fees and Gas
+    description: Network fees, gas costs, and transaction cost concerns.
+    seed_phrases: ["gas fee", "phi", "fee", "expensive gas", "slippage", "transaction fee"]
+    compatible_entity_types: ["brand", "product", "organization", "concept"]
+    linked_topic_keys: ["blockchain_defi_swaps_and_liquidity", "blockchain_bridge_and_cross_chain_transfer", "blockchain_chain_and_ecosystem_comparison"]
+    related_issue_ids: ["high_gas_fee_problem", "slippage_liquidity_problem"]
+  - id: speed_finality
+    label: Speed and Finality
+    description: Transaction speed, confirmation time, and chain responsiveness.
+    seed_phrases: ["fast", "nhanh", "slow", "pending", "finality", "speed"]
+    compatible_entity_types: ["brand", "product", "concept"]
+    linked_topic_keys: ["blockchain_chain_and_ecosystem_comparison", "blockchain_bridge_and_cross_chain_transfer"]
+    related_issue_ids: ["failed_transfer_or_stuck_tx"]
+  - id: decentralization
+    label: Decentralization
+    description: Network openness, validator concentration, and censorship-resistance discussion.
+    seed_phrases: ["decentralized", "tap trung", "validator", "permissionless", "phi tap trung"]
+    compatible_entity_types: ["brand", "concept"]
+    linked_topic_keys: ["blockchain_chain_and_ecosystem_comparison", "blockchain_regulation_compliance_and_tax"]
+  - id: compliance_kyc
+    label: Compliance and KYC
+    description: Identity verification, compliance checks, and regulatory friction.
+    seed_phrases: ["kyc", "compliance", "verify", "xac minh", "withdrawal freeze", "tax"]
+    compatible_entity_types: ["organization", "concept"]
+    linked_topic_keys: ["blockchain_exchange_kyc_and_offramp", "blockchain_regulation_compliance_and_tax"]
+    related_issue_ids: ["kyc_withdrawal_block"]
+  - id: liquidity_depth
+    label: Liquidity
+    description: Liquidity depth, swap execution, and trading depth.
+    seed_phrases: ["liquidity", "depth", "tvl", "pool", "slippage", "thin book"]
+    compatible_entity_types: ["product", "organization", "concept"]
+    linked_topic_keys: ["blockchain_defi_swaps_and_liquidity", "blockchain_market_narratives_and_altcoins"]
+    related_issue_ids: ["slippage_liquidity_problem"]
+  - id: interoperability
+    label: Interoperability
+    description: Cross-chain movement, bridging, and multi-chain compatibility.
+    seed_phrases: ["bridge", "cross chain", "multi chain", "interoperability", "layerzero"]
+    compatible_entity_types: ["brand", "product", "concept"]
+    linked_topic_keys: ["blockchain_bridge_and_cross_chain_transfer", "blockchain_chain_and_ecosystem_comparison"]
+    related_issue_ids: ["bridge_exploit_or_failed_bridge"]
+  - id: airdrop_eligibility
+    label: Airdrop Eligibility
+    description: Farming, task completion, and eligibility discussion.
+    seed_phrases: ["airdrop", "eligibility", "farm", "point", "snapshot", "galxe"]
+    compatible_entity_types: ["brand", "product", "concept"]
+    linked_topic_keys: ["blockchain_airdrop_eligibility_and_farming", "blockchain_scam_phishing_and_wallet_safety"]
+    related_issue_ids: ["fake_airdrop_problem"]
+intent_categories:
+  - id: question
+    label: Question
+  - id: complaint
+    label: Complaint
+  - id: commentary
+    label: Commentary
+  - id: praise
+    label: Praise
+  - id: purchase_intent
+    label: Purchase Intent
+  - id: recommendation
+    label: Recommendation
+  - id: compare
+    label: Comparison
+  - id: warning
+    label: Warning
+issue_categories:
+  - id: phishing_wallet_drain
+    label: Phishing or Wallet Drain
+    description: Fake links, malicious approvals, and wallet draining risk.
+    seed_phrases: ["phishing", "drain wallet", "fake link", "approval scam", "connect wallet la mat"]
+    compatible_entity_types: ["product", "organization", "concept"]
+    linked_topic_keys: ["blockchain_scam_phishing_and_wallet_safety", "blockchain_wallet_setup_and_recovery"]
+    related_aspect_ids: ["security_safety"]
+  - id: rugpull_scam_risk
+    label: Rug Pull or Scam Risk
+    description: Project-level scam or rug-pull suspicion.
+    seed_phrases: ["rug pull", "scam", "project lua dao", "exit liquidity", "ponzi"]
+    compatible_entity_types: ["brand", "product", "concept"]
+    linked_topic_keys: ["blockchain_scam_phishing_and_wallet_safety", "blockchain_market_narratives_and_altcoins"]
+    related_aspect_ids: ["security_safety", "liquidity_depth"]
+  - id: bridge_exploit_or_failed_bridge
+    label: Bridge Exploit or Failed Bridge
+    description: Bridge exploit, bridging failure, or cross-chain loss.
+    seed_phrases: ["bridge exploit", "bridge failed", "cross chain loi", "bridge stuck", "mat tien bridge"]
+    compatible_entity_types: ["brand", "product", "concept"]
+    linked_topic_keys: ["blockchain_bridge_and_cross_chain_transfer", "blockchain_scam_phishing_and_wallet_safety"]
+    related_aspect_ids: ["interoperability", "security_safety"]
+  - id: failed_transfer_or_stuck_tx
+    label: Failed Transfer or Stuck Transaction
+    description: Pending or failed transfers and stuck transactions.
+    seed_phrases: ["pending", "stuck tx", "failed transfer", "khong den", "transaction fail"]
+    compatible_entity_types: ["brand", "product", "organization", "concept"]
+    linked_topic_keys: ["blockchain_bridge_and_cross_chain_transfer", "blockchain_exchange_kyc_and_offramp"]
+    related_aspect_ids: ["speed_finality", "fees_gas"]
+  - id: wallet_recovery_problem
+    label: Wallet Recovery Problem
+    description: Seed phrase, recovery, and account access problems.
+    seed_phrases: ["seed phrase", "recovery", "mat vi", "khong vao duoc wallet", "khong backup"]
+    compatible_entity_types: ["product", "concept"]
+    linked_topic_keys: ["blockchain_wallet_setup_and_recovery", "blockchain_scam_phishing_and_wallet_safety"]
+    related_aspect_ids: ["security_safety", "usability_onboarding"]
+  - id: high_gas_fee_problem
+    label: High Gas Fee
+    description: Gas fee or transaction fee is too expensive.
+    seed_phrases: ["gas fee cao", "phi cao", "expensive gas", "fee chat", "network fee"]
+    compatible_entity_types: ["brand", "product", "concept"]
+    linked_topic_keys: ["blockchain_bridge_and_cross_chain_transfer", "blockchain_defi_swaps_and_liquidity", "blockchain_chain_and_ecosystem_comparison"]
+    related_aspect_ids: ["fees_gas"]
+  - id: kyc_withdrawal_block
+    label: KYC or Withdrawal Block
+    description: Exchange verification or withdrawal is blocked or delayed.
+    seed_phrases: ["kyc pending", "verify fail", "withdraw bi khoa", "rut tien cham", "freeze"]
+    compatible_entity_types: ["organization", "concept"]
+    linked_topic_keys: ["blockchain_exchange_kyc_and_offramp", "blockchain_regulation_compliance_and_tax"]
+    related_aspect_ids: ["compliance_kyc"]
+  - id: fake_airdrop_problem
+    label: Fake Airdrop or Fake Eligibility
+    description: Fake airdrop tasks, phishing forms, or misleading eligibility bait.
+    seed_phrases: ["fake airdrop", "fake galxe", "eligibility scam", "airdrop lua", "claim gia"]
+    compatible_entity_types: ["product", "concept"]
+    linked_topic_keys: ["blockchain_airdrop_eligibility_and_farming", "blockchain_scam_phishing_and_wallet_safety"]
+    related_aspect_ids: ["airdrop_eligibility", "security_safety"]
+  - id: smart_contract_bug
+    label: Smart Contract Bug
+    description: Contract bug, exploit, or approval risk discussion.
+    seed_phrases: ["smart contract bug", "exploit", "approval risk", "contract loi", "hack contract"]
+    compatible_entity_types: ["product", "concept"]
+    linked_topic_keys: ["blockchain_defi_swaps_and_liquidity", "blockchain_scam_phishing_and_wallet_safety"]
+    related_aspect_ids: ["security_safety", "interoperability"]
+  - id: slippage_liquidity_problem
+    label: Slippage or Liquidity Problem
+    description: Poor execution, thin pools, or bad liquidity.
+    seed_phrases: ["slippage", "thin liquidity", "pool mong", "gia truot", "swap xau"]
+    compatible_entity_types: ["product", "concept"]
+    linked_topic_keys: ["blockchain_defi_swaps_and_liquidity", "blockchain_market_narratives_and_altcoins"]
+    related_aspect_ids: ["liquidity_depth", "fees_gas"]
+source_channels:
+  - id: tiktok
+    label: TikTok
+  - id: facebook
+    label: Facebook
+  - id: youtube
+    label: YouTube
+  - id: telegram
+    label: Telegram
+entities:
+  - id: brand.ethereum
+    name: Ethereum
+    entity_type: brand
+    knowledge_layer: domain
+    aliases: ["ethereum", "eth chain"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Leading smart-contract ecosystem and L1 chain.
+    related_phrases: ["gas fee", "defi", "bridge", "smart contract"]
+  - id: brand.solana
+    name: Solana
+    entity_type: brand
+    knowledge_layer: domain
+    aliases: ["solana", "sol"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: High-throughput smart-contract ecosystem.
+    related_phrases: ["fast", "cheap fee", "ecosystem"]
+  - id: brand.bnb_chain
+    name: BNB Chain
+    entity_type: brand
+    knowledge_layer: domain
+    aliases: ["bnb chain", "bsc", "binance smart chain"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: EVM chain with strong retail DeFi usage.
+    related_phrases: ["cheap fee", "dex", "bridge"]
+  - id: brand.arbitrum
+    name: Arbitrum
+    entity_type: brand
+    knowledge_layer: domain
+    aliases: ["arbitrum", "arb"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Ethereum L2 ecosystem focused on cheaper execution.
+    related_phrases: ["bridge", "gas fee", "l2"]
+  - id: brand.base
+    name: Base
+    entity_type: brand
+    knowledge_layer: domain
+    aliases: ["base", "base chain"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Coinbase-backed Ethereum L2 ecosystem.
+    related_phrases: ["bridge", "onchain", "l2"]
+  - id: organization.binance
+    name: Binance
+    entity_type: organization
+    knowledge_layer: domain
+    aliases: ["binance"]
+    taxonomy_ids: ["category.finance", "category.exchange"]
+    description: Major centralized exchange and off-ramp.
+    related_phrases: ["kyc", "withdraw", "off-ramp", "usdt"]
+  - id: organization.okx
+    name: OKX
+    entity_type: organization
+    knowledge_layer: domain
+    aliases: ["okx", "okex"]
+    taxonomy_ids: ["category.finance", "category.exchange"]
+    description: Centralized exchange and wallet ecosystem.
+    related_phrases: ["withdraw", "kyc", "wallet"]
+  - id: organization.bybit
+    name: Bybit
+    entity_type: organization
+    knowledge_layer: domain
+    aliases: ["bybit"]
+    taxonomy_ids: ["category.finance", "category.exchange"]
+    description: Centralized exchange used for trading and off-ramp discussion.
+    related_phrases: ["withdraw", "verify", "trading"]
+  - id: product.metamask
+    name: MetaMask
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["metamask", "meta mask"]
+    taxonomy_ids: ["category.finance", "category.wallet"]
+    description: Widely used EVM wallet.
+    related_phrases: ["wallet", "seed phrase", "bridge", "approval"]
+    neighboring_aspect_ids: ["security_safety", "usability_onboarding", "interoperability"]
+  - id: product.phantom_wallet
+    name: Phantom
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["phantom", "phantom wallet"]
+    taxonomy_ids: ["category.finance", "category.wallet"]
+    description: Popular Solana wallet.
+    related_phrases: ["wallet", "solana", "seed phrase"]
+  - id: product.trust_wallet
+    name: Trust Wallet
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["trust wallet", "trustwallet"]
+    taxonomy_ids: ["category.finance", "category.wallet"]
+    description: Multi-chain wallet product.
+    related_phrases: ["wallet", "recovery", "seed phrase"]
+  - id: product.uniswap
+    name: Uniswap
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["uniswap", "uni swap"]
+    taxonomy_ids: ["category.finance", "category.defi"]
+    description: Major DEX for swaps and liquidity.
+    related_phrases: ["swap", "liquidity", "pool", "slippage"]
+  - id: product.pancakeswap
+    name: PancakeSwap
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["pancakeswap", "pancake swap", "pcs"]
+    taxonomy_ids: ["category.finance", "category.defi"]
+    description: BNB Chain DEX and farming product.
+    related_phrases: ["swap", "liquidity", "farm"]
+  - id: product.aave
+    name: Aave
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["aave"]
+    taxonomy_ids: ["category.finance", "category.defi"]
+    description: DeFi lending protocol.
+    related_phrases: ["lending", "borrow", "defi", "tvl"]
+    anti_confusion_phrases: ["aave la gi", "crypto", "defi"]
+  - id: product.layerzero
+    name: LayerZero
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["layerzero", "layer zero", "zro"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Cross-chain messaging protocol tied to airdrop and bridge discourse.
+    related_phrases: ["cross chain", "airdrop", "bridge", "eligibility"]
+  - id: product.galxe
+    name: Galxe
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["galxe", "galaxy quest"]
+    taxonomy_ids: ["category.finance", "category.onchain_tools"]
+    description: Onchain campaign and quest platform used for airdrops and loyalty tasks.
+    related_phrases: ["quest", "airdrop", "eligibility", "campaign"]
+  - id: product.etherscan
+    name: Etherscan
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["etherscan", "ether scan"]
+    taxonomy_ids: ["category.finance", "category.onchain_tools"]
+    description: Ethereum block explorer.
+    related_phrases: ["explorer", "tx hash", "pending"]
+  - id: product.debank
+    name: DeBank
+    entity_type: product
+    knowledge_layer: domain
+    aliases: ["debank", "de bank"]
+    taxonomy_ids: ["category.finance", "category.onchain_tools"]
+    description: Wallet portfolio and onchain tracking tool.
+    related_phrases: ["portfolio", "tracking", "wallet", "onchain"]
+  - id: concept.kyc
+    name: KYC
+    entity_type: concept
+    knowledge_layer: domain
+    target_eligible: false
+    aliases: ["kyc", "verify", "xac minh danh tinh"]
+    taxonomy_ids: ["category.finance", "category.compliance"]
+    description: Identity verification requirement on exchanges and platforms.
+    related_phrases: ["withdraw", "freeze", "compliance"]
+  - id: concept.gas_fee
+    name: Gas Fee
+    entity_type: concept
+    knowledge_layer: domain
+    target_eligible: false
+    aliases: ["gas fee", "phi gas", "network fee"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Network execution fee concept.
+    related_phrases: ["phi cao", "transaction fee"]
+  - id: concept.liquidity
+    name: Liquidity
+    entity_type: concept
+    knowledge_layer: domain
+    target_eligible: false
+    aliases: ["liquidity", "thanh khoan", "pool"]
+    taxonomy_ids: ["category.finance", "category.defi"]
+    description: Trading depth and pool liquidity concept.
+    related_phrases: ["slippage", "tvl"]
+  - id: concept.bridge
+    name: Bridge
+    entity_type: concept
+    knowledge_layer: domain
+    target_eligible: false
+    aliases: ["bridge", "cross chain bridge", "cross-chain"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Cross-chain transfer bridge concept.
+    related_phrases: ["arbitrum bridge", "layerzero", "cross chain"]
+  - id: concept.airdrop
+    name: Airdrop
+    entity_type: concept
+    knowledge_layer: domain
+    target_eligible: false
+    aliases: ["airdrop", "eligibility", "farm airdrop", "quest"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Airdrop farming and eligibility concept.
+    related_phrases: ["galxe", "snapshot", "points"]
+  - id: concept.tokenomics
+    name: Tokenomics
+    entity_type: concept
+    knowledge_layer: domain
+    target_eligible: false
+    aliases: ["tokenomics", "unlock", "circulating supply"]
+    taxonomy_ids: ["category.finance", "category.blockchain"]
+    description: Token supply and incentive design concept.
+    related_phrases: ["narrative", "altcoin", "rotation"]
+topics:
+  - topic_key: blockchain_basics_and_explainers
+    label: Blockchain Basics and Explainers
+    description: Educational and explainer discussion about chains, wallets, and core blockchain concepts.
+    knowledge_layer: domain
+    topic_family: education
+    main_path_policy: core
+    seed_phrases: ["blockchain la gi", "defi la gi", "wallet la gi", "smart contract", "onchain la gi"]
+    related_entity_ids: ["brand.ethereum", "product.metamask", "concept.bridge", "concept.gas_fee"]
+    related_aspect_ids: ["usability_onboarding"]
+    compatible_entity_types: ["brand", "product", "concept"]
+  - topic_key: blockchain_defi_swaps_and_liquidity
+    label: DeFi Swaps, Lending, and Liquidity
+    description: Swaps, pools, lending, yield, and slippage discussion.
+    knowledge_layer: domain
+    topic_family: defi
+    main_path_policy: domain_primary
+    seed_phrases: ["swap", "dex", "liquidity", "tvl", "yield", "farm", "aave", "uniswap"]
+    related_entity_ids: ["product.uniswap", "product.pancakeswap", "product.aave", "concept.liquidity"]
+    related_aspect_ids: ["fees_gas", "liquidity_depth"]
+    related_issue_ids: ["slippage_liquidity_problem", "smart_contract_bug"]
+    compatible_entity_types: ["product", "concept"]
+  - topic_key: blockchain_wallet_setup_and_recovery
+    label: Wallet Setup, Recovery, and Key Safety
+    description: Wallet onboarding, recovery, approvals, and seed-phrase management.
+    knowledge_layer: domain
+    topic_family: wallet
+    main_path_policy: domain_primary
+    seed_phrases: ["wallet", "seed phrase", "backup", "metamask", "phantom", "trust wallet"]
+    related_entity_ids: ["product.metamask", "product.phantom_wallet", "product.trust_wallet"]
+    related_aspect_ids: ["security_safety", "usability_onboarding"]
+    related_issue_ids: ["wallet_recovery_problem", "phishing_wallet_drain"]
+    compatible_entity_types: ["product", "concept"]
+  - topic_key: blockchain_bridge_and_cross_chain_transfer
+    label: Bridge and Cross-chain Transfers
+    description: Bridging, cross-chain movement, and transfer friction.
+    knowledge_layer: domain
+    topic_family: interoperability
+    main_path_policy: domain_primary
+    seed_phrases: ["bridge", "cross chain", "layerzero", "arbitrum bridge", "base bridge", "chuyen chain"]
+    related_entity_ids: ["brand.arbitrum", "brand.base", "product.layerzero", "concept.bridge"]
+    related_aspect_ids: ["interoperability", "fees_gas", "speed_finality"]
+    related_issue_ids: ["bridge_exploit_or_failed_bridge", "failed_transfer_or_stuck_tx", "high_gas_fee_problem"]
+    compatible_entity_types: ["brand", "product", "concept"]
+  - topic_key: blockchain_exchange_kyc_and_offramp
+    label: Exchange KYC, Withdrawal, and Off-ramp
+    description: Exchange verification, withdrawal, P2P, and off-ramp experience.
+    knowledge_layer: domain
+    topic_family: exchange_ops
+    main_path_policy: domain_primary
+    seed_phrases: ["binance", "okx", "kyc", "withdraw", "off-ramp", "p2p", "rut usdt"]
+    related_entity_ids: ["organization.binance", "organization.okx", "organization.bybit", "concept.kyc"]
+    related_aspect_ids: ["compliance_kyc", "usability_onboarding"]
+    related_issue_ids: ["kyc_withdrawal_block", "failed_transfer_or_stuck_tx"]
+    compatible_entity_types: ["organization", "concept"]
+  - topic_key: blockchain_onchain_tools_and_portfolio_tracking
+    label: Onchain Tools and Portfolio Tracking
+    description: Explorers, dashboards, and wallet tracking tools.
+    knowledge_layer: domain
+    topic_family: tooling
+    main_path_policy: core
+    seed_phrases: ["etherscan", "debank", "explorer", "portfolio", "tx hash", "onchain tool"]
+    related_entity_ids: ["product.etherscan", "product.debank"]
+    related_aspect_ids: ["usability_onboarding"]
+    compatible_entity_types: ["product"]
+  - topic_key: blockchain_regulation_compliance_and_tax
+    label: Regulation, Compliance, and Tax
+    description: Regulation, tax, and compliance friction in the crypto stack.
+    knowledge_layer: domain
+    topic_family: regulation
+    main_path_policy: core
+    seed_phrases: ["regulation", "compliance", "tax", "kyc", "policy", "ban"]
+    related_entity_ids: ["organization.binance", "concept.kyc"]
+    related_aspect_ids: ["compliance_kyc", "decentralization"]
+    related_issue_ids: ["kyc_withdrawal_block"]
+    compatible_entity_types: ["organization", "concept", "brand"]
+  - topic_key: blockchain_market_narratives_and_altcoins
+    label: Market Narratives and Altcoin Rotation
+    description: Altcoin narratives, ecosystem rotation, and tokenomics chatter.
+    knowledge_layer: domain
+    topic_family: market_narrative
+    main_path_policy: generic_fallback
+    seed_phrases: ["altcoin", "rotation", "narrative", "tokenomics", "pump", "season"]
+    related_entity_ids: ["brand.ethereum", "brand.solana", "concept.tokenomics"]
+    related_aspect_ids: ["liquidity_depth"]
+    related_issue_ids: ["rugpull_scam_risk"]
+    compatible_entity_types: ["brand", "concept"]
+  - topic_key: blockchain_airdrop_eligibility_and_farming
+    label: Airdrop Eligibility and Farming
+    description: Questing, points, farming, and eligibility strategy.
+    knowledge_layer: domain
+    topic_family: airdrop
+    main_path_policy: core
+    seed_phrases: ["airdrop", "eligibility", "points", "snapshot", "galxe", "farm"]
+    related_entity_ids: ["product.galxe", "product.layerzero", "concept.airdrop"]
+    related_aspect_ids: ["airdrop_eligibility", "usability_onboarding"]
+    related_issue_ids: ["fake_airdrop_problem"]
+    compatible_entity_types: ["product", "concept"]
+  - topic_key: blockchain_scam_phishing_and_wallet_safety
+    label: Scam, Phishing, and Wallet Safety
+    description: Wallet safety, scam prevention, fake links, and malicious approvals.
+    knowledge_layer: domain
+    topic_family: safety
+    main_path_policy: domain_primary
+    issue_centric: true
+    seed_phrases: ["phishing", "scam", "fake airdrop", "drain wallet", "rug pull", "fake link"]
+    related_entity_ids: ["product.metamask", "product.galxe", "concept.airdrop"]
+    related_aspect_ids: ["security_safety", "airdrop_eligibility"]
+    related_issue_ids: ["phishing_wallet_drain", "rugpull_scam_risk", "fake_airdrop_problem", "bridge_exploit_or_failed_bridge"]
+    compatible_entity_types: ["product", "concept", "brand", "organization"]
+  - topic_key: blockchain_chain_and_ecosystem_comparison
+    label: Chain and Ecosystem Comparison
+    description: Comparing ecosystems on fee, speed, composability, and user fit.
+    knowledge_layer: domain
+    topic_family: ecosystem_comparison
+    main_path_policy: core
+    seed_phrases: ["ethereum vs solana", "arbitrum hay base", "chain nao", "fee re hon", "ecosystem"]
+    related_entity_ids: ["brand.ethereum", "brand.solana", "brand.arbitrum", "brand.base", "brand.bnb_chain"]
+    related_aspect_ids: ["fees_gas", "speed_finality", "decentralization", "interoperability"]
+    compatible_entity_types: ["brand"]
+  - topic_key: blockchain_price_only_chatter
+    label: Price-only Chatter
+    description: Pure price and pump talk without stronger business context.
+    knowledge_layer: domain
+    topic_family: market_narrative
+    main_path_policy: discovery_only
+    reportable: false
+    seed_phrases: ["pump", "dump", "moon", "price action", "entry gia nao"]
+    related_entity_ids: ["brand.ethereum", "brand.solana"]
+    compatible_entity_types: ["brand", "concept"]
+alias_contributions: []
+noise_terms: []
+activation:
+  signals:
+    - phrase: blockchain
+      weight: 1.4
+    - phrase: crypto
+      weight: 1.35
+    - phrase: defi
+      weight: 1.35
+    - phrase: wallet
+      weight: 1.2
+    - phrase: metamask
+      weight: 1.3
+    - phrase: binance
+      weight: 1.25
+    - phrase: airdrop
+      weight: 1.25
+    - phrase: galxe
+      weight: 1.2
+    - phrase: layerzero
+      weight: 1.2
+    - phrase: bridge
+      weight: 1.2
+    - phrase: onchain
+      weight: 1.15
+    - phrase: gas fee
+      weight: 1.1

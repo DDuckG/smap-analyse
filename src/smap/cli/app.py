@@ -1,5 +1,6 @@
 import argparse
 import json
+import sys
 from pathlib import Path
 from smap.core.settings import get_settings
 from smap.pipeline import run_pipeline
@@ -24,7 +25,12 @@ def _settings_from_args(args):
     return settings
 
 def _echo_json(payload):
-    print(json.dumps(payload, ensure_ascii=False, indent=2, default=str))
+    text = json.dumps(payload, ensure_ascii=False, indent=2, default=str)
+    if hasattr(sys.stdout, 'buffer'):
+        sys.stdout.buffer.write((text + '\n').encode('utf-8', errors='replace'))
+        sys.stdout.buffer.flush()
+        return
+    print(text)
 
 def _progress_callback(prefix):
 
