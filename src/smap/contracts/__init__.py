@@ -1,1 +1,2 @@
 """Input and domain contracts."""
+

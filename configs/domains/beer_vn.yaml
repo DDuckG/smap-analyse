@@ -313,7 +313,7 @@ entities:
     knowledge_layer: domain
     aliases: ["sunhop", "sun hop"]
     taxonomy_ids: ["category.beer_and_alcohol", "category.craft_beer"]
-    description: Craft beer brand used in fixture coverage and product linking tests.
+    description: Craft beer brand discussed in small-batch and hazy-style conversations.
     related_phrases: ["hazy", "craft beer", "small batch"]
   - id: product.heineken_silver
     name: Heineken Silver
@@ -376,7 +376,7 @@ entities:
     aliases: ["sunhop hazy24", "sunhop hazy 24", "hazy24", "hazy 24", "hzy-24"]
     compact_aliases: ["sunhophazy24", "hazy24", "hzy24"]
     taxonomy_ids: ["category.beer_and_alcohol", "category.craft_beer"]
-    description: Craft hazy beer product used in beer fixture and cross-domain tests.
+    description: Craft hazy beer product discussed in flavor, freshness, and taproom chatter.
     related_phrases: ["hazy", "bright taste", "craft beer"]
   - id: retailer.nova_store
     name: Nova Store
@@ -384,7 +384,7 @@ entities:
     knowledge_layer: domain
     aliases: ["nova store", "cua hang nova", "shop nova"]
     taxonomy_ids: ["category.retail"]
-    description: Example retail outlet used in beer fixture and where-to-buy chatter.
+    description: Retail outlet entity for where-to-buy and availability chatter.
     related_phrases: ["where to buy", "co hang", "beer shop"]
     anti_confusion_phrases: ["nova chain", "nova blockchain", "nova protocol"]
   - id: concept.draft_beer

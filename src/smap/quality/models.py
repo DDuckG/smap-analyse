@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from pydantic import BaseModel, Field
+
 
 class AuthorQualityRecord(BaseModel):
     author_id: str
@@ -13,6 +15,7 @@ class AuthorQualityRecord(BaseModel):
     repost_like_ratio: float
     average_mention_spam_score: float
     reason_codes: list[str] = Field(default_factory=list)
+
 
 class QualityAnalysisResult(BaseModel):
     mentions_updated: int = 0

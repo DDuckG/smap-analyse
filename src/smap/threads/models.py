@@ -1,11 +1,14 @@
 from __future__ import annotations
+
 from pydantic import BaseModel, Field
+
 
 class ThreadEdge(BaseModel):
     root_id: str
     parent_id: str
     child_id: str
     depth: int
+
 
 class MentionContext(BaseModel):
     mention_id: str
@@ -18,6 +21,7 @@ class MentionContext(BaseModel):
     root_text: str
     parent_text: str | None = None
 
+
 class ThreadSummary(BaseModel):
     root_id: str
     total_mentions: int
@@ -28,7 +32,9 @@ class ThreadSummary(BaseModel):
     top_comment_ids: list[str] = Field(default_factory=list)
     top_comment_scores: list[float] = Field(default_factory=list)
 
+
 class ThreadBundle(BaseModel):
     summaries: list[ThreadSummary]
     edges: list[ThreadEdge]
     contexts: list[MentionContext]
+

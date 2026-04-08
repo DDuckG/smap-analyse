@@ -1,8 +1,9 @@
 metadata:
   name: cosmetics-vn
-  version: "2026.03.30-domain-pack"
-  description: Vietnam cosmetics domain ontology focused on facial cleanser and
-    skincare cleansing conversations for canonical social-listening runs.
+  version: 2026.04.06-cleanser-quality-restore
+  description: Vietnam cosmetics cleanser ontology for production social-listening
+    runs. This pack is the runtime-ready cosmetics domain, not the old example smoke
+    ontology.
 entity_types:
 - brand
 - product
@@ -1245,7 +1246,7 @@ topics:
   - battle
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   negative_phrases:
   - official mall
   - fake
@@ -1296,7 +1297,7 @@ topics:
   - treatment
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   negative_phrases:
   - official mall
   - fake
@@ -1346,7 +1347,7 @@ topics:
   - lỗ chân lông
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   negative_phrases:
   - official mall
   - fake
@@ -1396,7 +1397,7 @@ topics:
   - rửa xong
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   negative_phrases:
   - official mall
   - fake
@@ -1442,7 +1443,7 @@ topics:
   - flash sale
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   negative_phrases:
   - breakout
   - kích ứng
@@ -1482,7 +1483,7 @@ topics:
   - real hay fake
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   issue_centric: true
   related_entity_ids:
   - brand.cetaphil
@@ -1518,7 +1519,7 @@ topics:
   - size
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   negative_phrases:
   - official mall
   - fake
@@ -1560,7 +1561,7 @@ topics:
   - hợp da nào
   domain_tags:
   - beauty_cosmetics
-  - cosmetics_vn
+  - facial_cleanser_vn
   negative_phrases:
   - sale
   - promo

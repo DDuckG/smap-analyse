@@ -33,7 +33,6 @@ from smap.hil.topic_lineage import apply_topic_lineage
 from smap.normalization.models import MentionRecord
 from smap.ontology.prototypes import PrototypeRegistry
 from smap.providers.base import EmbeddingProvider, EmbeddingPurpose, TopicDocument, TopicProvider
-from smap.providers.fallback import FallbackTopicProvider
 from smap.threads.models import MentionContext
 
 
@@ -51,7 +50,9 @@ class TopicCandidateEnricher:
         artifact_level: Literal["a", "b", "c"] = "b",
         lineage_level: Literal["a", "b", "c"] = "b",
     ) -> None:
-        self.topic_provider = topic_provider or FallbackTopicProvider()
+        if topic_provider is None:
+            raise ValueError("TopicCandidateEnricher requires an ontology-guided topic provider.")
+        self.topic_provider = topic_provider
         self.segmenter = SemanticSegmenter()
         self._topic_facts_by_mention: dict[str, list[TopicFact]] = defaultdict(list)
         self._topic_artifacts: list[TopicArtifactFact] = []

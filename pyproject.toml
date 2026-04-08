@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "smap-core"
 version = "1.0.0"
-description = "Trimmed SMAP core pipeline handoff for service wrapping"
+description = "Clean SMAP runtime handoff with a single ONNX CPU intelligence path"
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
 license = { text = "MIT" }
@@ -22,12 +22,18 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-intelligence = [
-  "fasttext-wheel>=0.9.2",
-  "torch>=2.6.0",
+runtime = [
+  "fasttext-community>=0.11.5",
   "transformers>=4.49.0",
   "sentencepiece>=0.2.0",
+  "onnxruntime>=1.23.1",
+  "optimum-onnx[onnxruntime]>=0.1.0",
   "faiss-cpu>=1.9.0",
+]
+dev = [
+  "mypy>=1.15.0",
+  "pytest>=8.3.5",
+  "ruff>=0.11.2",
 ]
 
 [project.scripts]

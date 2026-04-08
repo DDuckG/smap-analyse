@@ -25,7 +25,6 @@ from smap.providers.base import (
     VectorReuseState,
     VectorSearchHit,
 )
-from smap.providers.fallback import TokenOverlapEmbeddingProvider
 from smap.providers.vector_index_manifest import corpus_hash
 
 MIN_CONTEXTUAL_TOKEN_OVERLAP = 0.6
@@ -139,7 +138,9 @@ class CanonicalizationEngine:
         verification_level: VerifierLevel = "b",
     ) -> None:
         self.alias_registry = alias_registry
-        self.embedding_provider = embedding_provider or TokenOverlapEmbeddingProvider()
+        if embedding_provider is None:
+            raise ValueError("CanonicalizationEngine requires an embedding provider.")
+        self.embedding_provider = embedding_provider
         self.prototype_registry = prototype_registry
         self.vector_index = vector_index
         self.fuzzy_threshold = fuzzy_threshold
