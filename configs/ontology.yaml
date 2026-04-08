@@ -1,0 +1,1135 @@
+metadata:
+  name: smap-social-intel-base
+  version: "2026.03.22-identity-spine"
+  description: >
+    General-purpose social listening base ontology. The base layer stays domain
+    neutral and business-readable. Domain overlays extend it with catalog
+    entities, domain phrasing, and domain-compatible aspect and issue cues.
+
+entity_types:
+  - brand
+  - product
+  - product_line
+  - category
+  - feature
+  - issue
+  - benefit
+  - campaign
+  - retailer
+  - influencer
+  - organization
+  - person
+  - location
+  - facility
+  - concept
+
+taxonomy_nodes:
+  - id: category.consumer_goods
+    label: Consumer Goods
+    node_type: category
+  - id: category.automotive
+    label: Automotive
+    node_type: category
+  - id: category.beauty_cosmetics
+    label: Beauty and Cosmetics
+    node_type: category
+  - id: category.electronics
+    label: Electronics
+    node_type: category
+  - id: category.jobs_recruitment
+    label: Jobs and Recruitment
+    node_type: category
+  - id: category.market_expansion
+    label: Market Expansion
+    node_type: category
+  - id: category.manufacturing
+    label: Manufacturing
+    node_type: category
+  - id: category.service_operations
+    label: Service Operations
+    node_type: category
+  - id: category.investment
+    label: Investment
+    node_type: category
+
+  - id: feature.price
+    label: Price
+    node_type: feature
+  - id: feature.quality
+    label: Quality
+    node_type: feature
+  - id: feature.design
+    label: Design
+    node_type: feature
+  - id: feature.performance
+    label: Performance
+    node_type: feature
+  - id: feature.durability
+    label: Durability
+    node_type: feature
+  - id: feature.availability
+    label: Availability
+    node_type: feature
+  - id: feature.customer_service
+    label: Customer Service
+    node_type: feature
+  - id: feature.delivery
+    label: Delivery
+    node_type: feature
+  - id: feature.trust
+    label: Trust
+    node_type: feature
+  - id: feature.safety
+    label: Safety
+    node_type: feature
+  - id: feature.usability
+    label: Usability
+    node_type: feature
+  - id: feature.battery
+    label: Battery
+    node_type: feature
+  - id: feature.charging
+    label: Charging
+    node_type: feature
+  - id: feature.manufacturing
+    label: Manufacturing
+    node_type: feature
+  - id: feature.factory_location
+    label: Facility Location
+    node_type: feature
+  - id: feature.hiring
+    label: Hiring
+    node_type: feature
+  - id: feature.expansion
+    label: Expansion
+    node_type: feature
+  - id: feature.localization
+    label: Localization
+    node_type: feature
+
+aspect_categories:
+  - id: price
+    label: Price
+    description: Price point, financing, cost, and value-for-money discussion.
+    seed_phrases:
+      - giá
+      - gia
+      - price
+      - pricing
+      - cost
+      - đắt
+      - dat
+      - rẻ
+      - re
+      - value
+      - worth
+      - trả góp
+      - tra gop
+    negative_phrases:
+      - flash sale
+      - voucher code
+    compatible_entity_types: [brand, product, product_line, retailer, organization, concept]
+    linked_topic_keys: [pricing_and_value, flashsale]
+    related_issue_ids: [pricing_value_concern]
+  - id: quality
+    label: Quality
+    description: Overall build quality, finishing, reliability, and perceived product quality.
+    seed_phrases:
+      - chất lượng
+      - chat luong
+      - quality
+      - build
+      - hoàn thiện
+      - hoan thien
+      - finish
+      - texture
+      - vật liệu
+      - vat lieu
+    compatible_entity_types: [brand, product, product_line, concept]
+    linked_topic_keys: [product_experience]
+    related_issue_ids: [product_defect]
+  - id: design
+    label: Design
+    description: Styling, aesthetics, packaging, appearance, and visual design.
+    seed_phrases:
+      - thiết kế
+      - thiet ke
+      - design
+      - kiểu dáng
+      - kieu dang
+      - style
+      - look
+      - mẫu mã
+      - mau ma
+      - đẹp
+      - dep
+    compatible_entity_types: [brand, product, product_line, concept]
+    linked_topic_keys: [product_experience, launch]
+  - id: performance
+    label: Performance
+    description: Speed, responsiveness, power, and overall operational performance.
+    seed_phrases:
+      - hiệu năng
+      - hieu nang
+      - performance
+      - lag
+      - chậm
+      - cham
+      - nhanh
+      - smooth
+      - mạnh
+      - manh
+      - tăng tốc
+      - tang toc
+    compatible_entity_types: [brand, product, product_line, concept]
+    linked_topic_keys: [performance_and_battery, delay]
+    related_issue_ids: [performance_problem]
+  - id: durability
+    label: Durability
+    description: Longevity, wear, breakage risk, and robustness over time.
+    seed_phrases:
+      - bền
+      - ben
+      - durability
+      - durable
+      - wear
+      - broken
+      - xuống cấp
+      - xuong cap
+    compatible_entity_types: [brand, product, product_line, concept]
+    linked_topic_keys: [product_experience]
+    related_issue_ids: [product_defect]
+  - id: availability
+    label: Availability
+    description: Stock, availability, supply, and purchase readiness.
+    seed_phrases:
+      - available
+      - availability
+      - stock
+      - có hàng
+      - co hang
+      - hết hàng
+      - het hang
+      - sold out
+      - backorder
+    compatible_entity_types: [brand, product, product_line, retailer, concept]
+    linked_topic_keys: [launch, delay]
+    related_issue_ids: [availability_problem, rollout_delay]
+  - id: customer_service
+    label: Customer Service
+    description: Support quality, response speed, service process, and after-sales care.
+    seed_phrases:
+      - customer service
+      - service
+      - support
+      - chăm sóc khách hàng
+      - cham soc khach hang
+      - cskh
+      - bảo hành
+      - bao hanh
+      - tư vấn
+      - tu van
+      - hotline
+    compatible_entity_types: [brand, organization, retailer, facility, concept]
+    linked_topic_keys: [service_and_support, delay]
+    related_issue_ids: [service_problem]
+  - id: delivery
+    label: Delivery
+    description: Shipping, handover, arrival, and delivery operations.
+    seed_phrases:
+      - giao hàng
+      - giao
+      - delivery
+      - ship
+      - shipping
+      - nhận hàng
+      - nhan hang
+      - giao chậm
+      - late delivery
+    compatible_entity_types: [brand, product, retailer, organization, concept]
+    linked_topic_keys: [delay, launch]
+    related_issue_ids: [delivery_problem, rollout_delay]
+  - id: trust
+    label: Trust
+    description: Credibility, honesty, reliability, and confidence in the brand or source.
+    seed_phrases:
+      - trust
+      - uy tín
+      - uy tin
+      - fake
+      - scam
+      - legit
+      - đáng tin
+      - dang tin
+    compatible_entity_types: [brand, organization, retailer, influencer, concept]
+    linked_topic_keys: [service_and_support, pricing_and_value]
+    related_issue_ids: [trust_concern, misleading_job_info]
+  - id: safety
+    label: Safety
+    description: Physical safety, risk, danger, accidents, or hazard concern.
+    seed_phrases:
+      - safety
+      - safe
+      - an toàn
+      - an toan
+      - nguy hiểm
+      - nguy hiem
+      - cháy
+      - chay
+      - risk
+    compatible_entity_types: [brand, product, facility, location, concept]
+    linked_topic_keys: [performance_and_battery, jobs_and_factory]
+    related_issue_ids: [safety_concern, compliance_concern]
+  - id: usability
+    label: Usability
+    description: Ease of use, setup flow, navigation, and interaction quality.
+    seed_phrases:
+      - usability
+      - easy
+      - dễ dùng
+      - de dung
+      - khó dùng
+      - kho dung
+      - confusing
+      - setup flow
+      - checkout flow
+      - thao tác
+      - thao tac
+    compatible_entity_types: [product, product_line, feature, concept, brand]
+    linked_topic_keys: [product_experience, service_and_support]
+    related_issue_ids: [usability_problem]
+  - id: battery
+    label: Battery
+    description: Battery life, battery quality, degradation, and energy usage.
+    seed_phrases:
+      - battery
+      - pin
+      - hao pin
+      - chai pin
+      - chai
+      - battery health
+    compatible_entity_types: [product, product_line, brand, concept]
+    linked_topic_keys: [performance_and_battery]
+    related_issue_ids: [performance_problem, product_defect]
+  - id: charging
+    label: Charging
+    description: Charging speed, station access, charging compatibility, and charging reliability.
+    seed_phrases:
+      - charging
+      - charge
+      - sạc
+      - sac
+      - trạm sạc
+      - tram sac
+      - charger
+      - charging station
+    compatible_entity_types: [product, product_line, brand, facility, concept]
+    linked_topic_keys: [performance_and_battery, service_and_support]
+    related_issue_ids: [performance_problem, availability_problem]
+  - id: manufacturing
+    label: Manufacturing
+    description: Factory operations, production quality, output, and manufacturing execution.
+    seed_phrases:
+      - manufacturing
+      - sản xuất
+      - san xuat
+      - factory
+      - nhà máy
+      - nha may
+      - lắp ráp
+      - lap rap
+      - dây chuyền
+      - day chuyen
+    compatible_entity_types: [facility, location, organization, brand, concept]
+    linked_topic_keys: [jobs_and_factory, market_expansion]
+    related_issue_ids: [rollout_delay, compliance_concern]
+  - id: factory_location
+    label: Facility Location
+    description: Plant siting, site location, and facility geography.
+    seed_phrases:
+      - factory location
+      - facility location
+      - plant location
+      - địa điểm nhà máy
+      - dia diem nha may
+      - khu công nghiệp
+      - khu cong nghiep
+      - site
+    compatible_entity_types: [facility, location, concept, organization]
+    linked_topic_keys: [jobs_and_factory, market_expansion]
+    related_issue_ids: [localization_concern]
+  - id: hiring
+    label: Hiring and Jobs
+    description: Job openings, recruitment, interviews, and hiring process quality.
+    seed_phrases:
+      - tuyển dụng
+      - tuyen dung
+      - hiring
+      - recruitment
+      - việc làm
+      - viec lam
+      - apply
+      - ứng tuyển
+      - ung tuyen
+      - phỏng vấn
+      - phong van
+    compatible_entity_types: [organization, facility, location, concept, brand]
+    linked_topic_keys: [jobs_and_factory]
+    related_issue_ids: [hiring_process_problem, misleading_job_info]
+  - id: expansion
+    label: Expansion
+    description: Market rollout, network growth, dealer footprint, and business expansion.
+    seed_phrases:
+      - expansion
+      - expand
+      - mở rộng
+      - mo rong
+      - rollout
+      - market entry
+      - dealer network
+      - showroom
+    compatible_entity_types: [brand, organization, location, concept]
+    linked_topic_keys: [market_expansion, launch]
+    related_issue_ids: [rollout_delay]
+  - id: localization
+    label: Localization
+    description: Local assembly, local adaptation, localization quality, and regional fit.
+    seed_phrases:
+      - localization
+      - localize
+      - nội địa hóa
+      - noi dia hoa
+      - local assembly
+      - local market
+      - adapted
+    compatible_entity_types: [brand, product, organization, location, concept]
+    linked_topic_keys: [market_expansion]
+    related_issue_ids: [localization_concern, policy_regulatory_concern]
+
+intent_categories:
+  - id: question
+    label: Question
+  - id: complaint
+    label: Complaint
+  - id: commentary
+    label: Commentary
+  - id: praise
+    label: Praise
+  - id: purchase_intent
+    label: Purchase Intent
+  - id: recommendation
+    label: Recommendation
+  - id: compare
+    label: Comparison
+  - id: rumor_speculation
+    label: Rumor or Speculation
+  - id: job_interest
+    label: Job Interest
+  - id: investment_interest
+    label: Investment Interest
+
+issue_categories:
+  - id: product_defect
+    label: Product Defect
+    description: Defects, broken parts, malfunctions, or poor build issues.
+    seed_phrases:
+      - defect
+      - lỗi
+      - loi
+      - hỏng
+      - hong
+      - broken
+      - lỗi vặt
+      - loi vat
+    compatible_entity_types: [product, product_line, brand, concept]
+    linked_topic_keys: [product_experience, performance_and_battery]
+    related_aspect_ids: [quality, durability, battery]
+  - id: performance_problem
+    label: Performance Problem
+    description: Slow response, lag, weak performance, overheating, or poor charging behavior.
+    seed_phrases:
+      - lag
+      - slow
+      - chậm
+      - cham
+      - yếu
+      - yeu
+      - freeze
+      - crash
+      - nóng
+      - nong
+      - hao pin
+    compatible_entity_types: [product, product_line, brand, concept]
+    linked_topic_keys: [performance_and_battery, delay]
+    related_aspect_ids: [performance, battery, charging]
+  - id: service_problem
+    label: Service Problem
+    description: Poor support quality, slow support, bad after-sales handling, or repair friction.
+    seed_phrases:
+      - service problem
+      - support tệ
+      - support te
+      - chậm xử lý
+      - cham xu ly
+      - bảo hành tệ
+      - bao hanh te
+      - no response
+      - refund
+    compatible_entity_types: [brand, organization, retailer, facility, concept]
+    linked_topic_keys: [service_and_support, delay]
+    related_aspect_ids: [customer_service, delivery]
+  - id: delivery_problem
+    label: Delivery Problem
+    description: Delayed handover, missed delivery, or broken delivery expectations.
+    seed_phrases:
+      - delivery problem
+      - giao chậm
+      - giao tre
+      - trễ giao
+      - tre giao
+      - late delivery
+      - chưa nhận hàng
+      - chua nhan hang
+    compatible_entity_types: [brand, product, retailer, organization, concept]
+    linked_topic_keys: [delay, launch]
+    related_aspect_ids: [delivery, availability]
+  - id: trust_concern
+    label: Trust Concern
+    description: Scam suspicion, lack of credibility, or trust erosion.
+    seed_phrases:
+      - scam
+      - fake
+      - lừa
+      - lua
+      - suspicious
+      - không tin
+      - khong tin
+      - trust issue
+    compatible_entity_types: [brand, organization, retailer, influencer, concept]
+    linked_topic_keys: [pricing_and_value, service_and_support]
+    related_aspect_ids: [trust]
+  - id: safety_concern
+    label: Safety Concern
+    description: Fire, danger, hazard, accident, or unsafe operation concern.
+    seed_phrases:
+      - unsafe
+      - danger
+      - nguy hiểm
+      - nguy hiem
+      - cháy
+      - chay
+      - mất an toàn
+      - mat an toan
+    compatible_entity_types: [product, brand, facility, location, concept]
+    linked_topic_keys: [performance_and_battery, jobs_and_factory]
+    related_aspect_ids: [safety, battery, charging]
+  - id: compliance_concern
+    label: Compliance Concern
+    description: Policy, compliance, labor, or regulatory process concern.
+    seed_phrases:
+      - policy
+      - regulation
+      - compliance
+      - pháp lý
+      - phap ly
+      - giấy phép
+      - giay phep
+      - audit
+    compatible_entity_types: [organization, facility, location, concept]
+    linked_topic_keys: [jobs_and_factory, market_expansion]
+    related_aspect_ids: [safety, manufacturing, localization]
+  - id: pricing_value_concern
+    label: Pricing or Value Concern
+    description: Price is too high, poor value, or pricing feels unreasonable.
+    seed_phrases:
+      - overpriced
+      - expensive
+      - đắt
+      - dat
+      - price cao
+      - không đáng
+      - khong dang
+      - not worth
+    compatible_entity_types: [brand, product, retailer, organization, concept]
+    linked_topic_keys: [pricing_and_value, flashsale]
+    related_aspect_ids: [price, trust]
+  - id: usability_problem
+    label: Usability Problem
+    description: Confusing flow, hard-to-use experience, awkward setup, or UX friction.
+    seed_phrases:
+      - hard to use
+      - confusing
+      - khó dùng
+      - kho dung
+      - setup flow
+      - checkout flow
+      - buggy flow
+      - thao tác khó
+      - thao tac kho
+    compatible_entity_types: [product, product_line, concept, brand]
+    linked_topic_keys: [product_experience, service_and_support]
+    related_aspect_ids: [usability]
+  - id: availability_problem
+    label: Availability Problem
+    description: No stock, missing availability, inaccessible charging or support network.
+    seed_phrases:
+      - unavailable
+      - out of stock
+      - sold out
+      - hết hàng
+      - het hang
+      - thiếu trạm sạc
+      - thieu tram sac
+    compatible_entity_types: [brand, product, product_line, retailer, facility, concept]
+    linked_topic_keys: [launch, performance_and_battery, service_and_support]
+    related_aspect_ids: [availability, charging]
+  - id: hiring_process_problem
+    label: Hiring Process Problem
+    description: Recruitment friction, interview issues, unclear hiring process, or poor candidate experience.
+    seed_phrases:
+      - hiring problem
+      - quy trình tuyển dụng
+      - quy trinh tuyen dung
+      - phỏng vấn lâu
+      - phong van lau
+      - hr không phản hồi
+      - hr khong phan hoi
+    compatible_entity_types: [organization, facility, location, concept]
+    linked_topic_keys: [jobs_and_factory]
+    related_aspect_ids: [hiring]
+  - id: misleading_job_info
+    label: Misleading Job Information
+    description: Suspicious or misleading recruitment content.
+    seed_phrases:
+      - lừa tuyển dụng
+      - lua tuyen dung
+      - fake job
+      - misleading job
+      - job scam
+    compatible_entity_types: [organization, facility, location, concept]
+    linked_topic_keys: [jobs_and_factory]
+    related_aspect_ids: [hiring, trust]
+  - id: rollout_delay
+    label: Rollout Delay
+    description: Launch, rollout, expansion, or production delay.
+    seed_phrases:
+      - delay
+      - rollout delay
+      - chậm mở bán
+      - cham mo ban
+      - lùi lịch
+      - lui lich
+      - backlog
+    compatible_entity_types: [brand, product, organization, facility, concept]
+    linked_topic_keys: [launch, delay, market_expansion]
+    related_aspect_ids: [availability, delivery, expansion, manufacturing]
+  - id: localization_concern
+    label: Localization Concern
+    description: Localization, local fit, or local assembly concern.
+    seed_phrases:
+      - localization issue
+      - nội địa hóa
+      - noi dia hoa
+      - local assembly
+      - không phù hợp thị trường
+      - khong phu hop thi truong
+    compatible_entity_types: [brand, product, organization, location, concept]
+    linked_topic_keys: [market_expansion]
+    related_aspect_ids: [localization, expansion, factory_location]
+  - id: policy_regulatory_concern
+    label: Policy or Regulatory Concern
+    description: Permit, policy, tax, or regulatory concern affecting rollout or operations.
+    seed_phrases:
+      - regulatory
+      - policy issue
+      - tax
+      - thuế
+      - thue
+      - permit
+      - giấy phép
+      - giay phep
+    compatible_entity_types: [organization, facility, location, concept]
+    linked_topic_keys: [market_expansion, jobs_and_factory]
+    related_aspect_ids: [localization, manufacturing, safety]
+
+source_channels:
+  - id: tiktok
+    label: TikTok
+  - id: facebook
+    label: Facebook
+  - id: youtube
+    label: YouTube
+
+entities:
+  - id: concept.manufacturing_facility
+    name: manufacturing facility
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: true
+    aliases:
+      - factory
+      - plant
+      - manufacturing facility
+      - production facility
+      - nhà máy
+      - nha may
+      - xưởng sản xuất
+      - xuong san xuat
+    compact_aliases:
+      - nhamay
+    taxonomy_ids:
+      - category.manufacturing
+    description: Generic manufacturing or production facility concept.
+    related_phrases:
+      - dây chuyền sản xuất
+      - day chuyen san xuat
+      - lắp ráp
+      - lap rap
+
+  - id: concept.production_site
+    name: production site
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: true
+    aliases:
+      - production site
+      - production base
+      - assembly site
+      - assembly plant
+      - cơ sở sản xuất
+      - co so san xuat
+    taxonomy_ids:
+      - category.manufacturing
+    description: Generic production or assembly site concept.
+    related_phrases:
+      - local assembly
+      - assembly line
+      - dây chuyền
+      - day chuyen
+
+  - id: concept.facility_location
+    name: facility location
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: false
+    aliases:
+      - facility location
+      - factory location
+      - plant location
+      - site location
+      - địa điểm nhà máy
+      - dia diem nha may
+    taxonomy_ids:
+      - category.manufacturing
+    description: Generic location reference for a plant or facility.
+    related_phrases:
+      - khu công nghiệp
+      - khu cong nghiep
+      - industrial park
+
+  - id: concept.job_opening
+    name: job opening
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: true
+    aliases:
+      - job opening
+      - job vacancy
+      - opening
+      - tuyển dụng
+      - tuyen dung
+      - việc làm
+      - viec lam
+      - tuyển người
+      - tuyen nguoi
+    taxonomy_ids:
+      - category.jobs_recruitment
+    description: Generic open-role or recruitment opportunity concept.
+    related_phrases:
+      - ứng tuyển
+      - ung tuyen
+      - hồ sơ
+      - ho so
+
+  - id: concept.hiring_interest
+    name: hiring interest
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: false
+    aliases:
+      - apply job
+      - apply now
+      - ứng tuyển
+      - ung tuyen
+      - nộp cv
+      - nop cv
+      - hiring
+      - recruitment
+    taxonomy_ids:
+      - category.jobs_recruitment
+    description: Generic hiring or application-interest concept.
+    related_phrases:
+      - candidate
+      - interview
+      - phỏng vấn
+      - phong van
+
+  - id: concept.market_expansion
+    name: market expansion
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: true
+    aliases:
+      - market expansion
+      - expand market
+      - market entry
+      - mở rộng thị trường
+      - mo rong thi truong
+      - vào thị trường mới
+      - vao thi truong moi
+    taxonomy_ids:
+      - category.market_expansion
+    description: Generic market-entry or expansion concept.
+    related_phrases:
+      - localization
+      - export
+      - dealer network
+
+  - id: concept.service_center
+    name: service center
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: true
+    aliases:
+      - service center
+      - support center
+      - repair center
+      - trung tâm dịch vụ
+      - trung tam dich vu
+      - trung tâm bảo hành
+      - trung tam bao hanh
+    taxonomy_ids:
+      - category.service_operations
+    description: Generic service or support-center concept.
+    related_phrases:
+      - after sales
+      - bảo dưỡng
+      - bao duong
+
+  - id: concept.product_line
+    name: product line
+    entity_type: concept
+    entity_kind: concept
+    knowledge_layer: base
+    target_eligible: true
+    aliases:
+      - product line
+      - lineup
+      - model line
+      - dòng sản phẩm
+      - dong san pham
+    taxonomy_ids:
+      - category.consumer_goods
+      - category.electronics
+      - category.automotive
+    description: Generic product-line or lineup concept.
+    related_phrases:
+      - variant
+      - trim
+      - model range
+
+topics:
+  - topic_key: launch
+    label: Product Launch and Rollout
+    topic_family: launch_rollout
+    main_path_policy: core
+    excluded_domain_tags: [facial_cleanser_vn]
+    description: Conversation about launches, openings, rollout timing, and early availability.
+    seed_phrases:
+      - ra mắt
+      - ra mat
+      - launch
+      - rollout
+      - mở bán
+      - mo ban
+      - pre order
+      - now available
+      - release
+      - debut
+    negative_phrases:
+      - tuyển dụng
+      - tuyen dung
+      - hiring
+    related_taxonomy_ids:
+      - category.consumer_goods
+      - category.automotive
+      - category.service_operations
+      - feature.availability
+    related_aspect_ids: [availability, delivery, expansion]
+    related_issue_ids: [rollout_delay, availability_problem]
+    compatible_entity_types: [brand, product, product_line, organization, location]
+
+  - topic_key: delay
+    label: Delay, Delivery, and Support Friction
+    topic_family: service_delay
+    main_path_policy: core
+    description: Conversation about delays, waiting time, slow service, and late delivery.
+    seed_phrases:
+      - delay
+      - chậm
+      - cham
+      - trễ
+      - tre
+      - giao chậm
+      - giao tre
+      - support
+      - chờ lâu
+      - cho lau
+      - backlog
+      - late delivery
+      - chậm xử lý
+      - cham xu ly
+    negative_phrases:
+      - sale off
+      - flash sale
+    related_taxonomy_ids:
+      - feature.delivery
+      - feature.customer_service
+      - category.service_operations
+    related_aspect_ids: [delivery, customer_service, availability, performance]
+    related_issue_ids: [delivery_problem, service_problem, rollout_delay, performance_problem]
+    compatible_entity_types: [brand, product, organization, retailer, facility, concept]
+
+  - topic_key: flashsale
+    label: Promotions and Flash Sale
+    topic_family: pricing_value
+    main_path_policy: core
+    excluded_domain_tags: [facial_cleanser_vn]
+    description: Conversation about discounts, flash-sale promotions, vouchers, and short-term offers.
+    seed_phrases:
+      - flash sale
+      - flashsale
+      - sale
+      - deal
+      - voucher
+      - khuyến mãi
+      - khuyen mai
+      - giảm giá
+      - giam gia
+      - ưu đãi
+      - uu dai
+      - discount
+    related_taxonomy_ids:
+      - feature.price
+      - category.consumer_goods
+    related_aspect_ids: [price, trust]
+    related_issue_ids: [pricing_value_concern]
+    compatible_entity_types: [brand, product, retailer, organization]
+
+  - topic_key: product_experience
+    label: Product Experience and Quality
+    topic_family: product_experience
+    main_path_policy: core
+    description: Discussion of quality, design, comfort, usability, and overall product experience.
+    seed_phrases:
+      - chất lượng
+      - chat luong
+      - quality
+      - thiết kế
+      - thiet ke
+      - design
+      - trải nghiệm
+      - trai nghiem
+      - sử dụng
+      - su dung
+      - comfort
+      - nội thất
+      - noi that
+      - ngoại thất
+      - ngoai that
+      - hoàn thiện
+      - hoan thien
+    related_taxonomy_ids:
+      - feature.quality
+      - feature.design
+      - feature.usability
+      - feature.durability
+    related_aspect_ids: [quality, design, usability, durability]
+    related_issue_ids: [product_defect, usability_problem]
+    compatible_entity_types: [brand, product, product_line, concept]
+
+  - topic_key: performance_and_battery
+    label: Performance, Battery, and Charging
+    topic_family: performance_power
+    main_path_policy: core
+    excluded_domain_tags: [facial_cleanser_vn, beauty_cosmetics]
+    description: Conversation about performance, battery quality, charging, range, and speed.
+    seed_phrases:
+      - pin
+      - battery
+      - sạc
+      - sac
+      - charging
+      - trạm sạc
+      - tram sac
+      - range
+      - hiệu năng
+      - hieu nang
+      - performance
+      - tăng tốc
+      - tang toc
+      - hao pin
+      - tiết kiệm điện
+      - tiet kiem dien
+    related_taxonomy_ids:
+      - feature.performance
+      - feature.battery
+      - feature.charging
+    related_aspect_ids: [performance, battery, charging, safety]
+    related_issue_ids: [performance_problem, safety_concern, availability_problem]
+    compatible_entity_types: [brand, product, product_line, concept]
+
+  - topic_key: pricing_and_value
+    label: Pricing and Value
+    topic_family: pricing_value
+    main_path_policy: core
+    excluded_domain_tags: [facial_cleanser_vn]
+    description: Conversation about price, value for money, discounts, and financing.
+    seed_phrases:
+      - giá
+      - gia
+      - price
+      - mắc
+      - mac
+      - rẻ
+      - re
+      - value
+      - khuyến mãi
+      - khuyen mai
+      - voucher
+      - trả góp
+      - tra gop
+      - chi phí
+      - chi phi
+      - worth
+    related_taxonomy_ids:
+      - feature.price
+      - category.investment
+    related_aspect_ids: [price, trust]
+    related_issue_ids: [pricing_value_concern, trust_concern]
+    compatible_entity_types: [brand, product, retailer, organization, concept]
+
+  - topic_key: service_and_support
+    label: Service and Support
+    topic_family: service_support
+    main_path_policy: core
+    description: Conversation about after-sales support, repairs, warranty, and customer service.
+    seed_phrases:
+      - bảo hành
+      - bao hanh
+      - warranty
+      - service center
+      - trung tâm dịch vụ
+      - trung tam dich vu
+      - chăm sóc khách hàng
+      - cham soc khach hang
+      - support
+      - sửa chữa
+      - sua chua
+      - phụ tùng
+      - phu tung
+      - bảo dưỡng
+      - bao duong
+    related_taxonomy_ids:
+      - feature.customer_service
+      - feature.delivery
+      - category.service_operations
+    related_aspect_ids: [customer_service, delivery, trust, charging]
+    related_issue_ids: [service_problem, delivery_problem, trust_concern, availability_problem]
+    compatible_entity_types: [brand, organization, retailer, facility, concept]
+
+  - topic_key: jobs_and_factory
+    label: Jobs, Factory, and Operations
+    topic_family: operations_workforce
+    main_path_policy: core
+    excluded_domain_tags: [facial_cleanser_vn, beauty_cosmetics]
+    description: Conversation about factories, production lines, labor, shifts, and hiring.
+    seed_phrases:
+      - nhà máy
+      - nha may
+      - factory
+      - xưởng
+      - xuong
+      - sản xuất
+      - san xuat
+      - dây chuyền
+      - day chuyen
+      - lắp ráp
+      - lap rap
+      - robot
+      - tăng ca
+      - tang ca
+      - ca làm
+      - ca lam
+      - tuyển dụng
+      - tuyen dung
+      - hiring
+      - công nhân
+      - cong nhan
+    related_taxonomy_ids:
+      - category.manufacturing
+      - category.jobs_recruitment
+      - feature.manufacturing
+      - feature.hiring
+    related_aspect_ids: [manufacturing, hiring, factory_location, safety]
+    related_issue_ids: [hiring_process_problem, misleading_job_info, compliance_concern]
+    compatible_entity_types: [organization, facility, location, brand, concept]
+
+  - topic_key: market_expansion
+    label: Market Expansion and Localization
+    topic_family: market_expansion
+    main_path_policy: core
+    excluded_domain_tags: [facial_cleanser_vn, beauty_cosmetics]
+    description: Conversation about new markets, localization, exports, and regional rollout.
+    seed_phrases:
+      - xuất khẩu
+      - xuat khau
+      - export
+      - indonesia
+      - india
+      - thị trường
+      - thi truong
+      - market
+      - localization
+      - nội địa hóa
+      - noi dia hoa
+      - đại lý
+      - dai ly
+      - showroom
+      - dealer
+    related_taxonomy_ids:
+      - category.market_expansion
+      - feature.localization
+      - feature.expansion
+    related_aspect_ids: [expansion, localization, factory_location]
+    related_issue_ids: [rollout_delay, localization_concern, policy_regulatory_concern]
+    compatible_entity_types: [brand, organization, location, facility, concept]
+
+alias_contributions: []
+
+noise_terms:
+  - term: haha
+    reason: low_information_social_reaction
+  - term: hehe
+    reason: low_information_social_reaction
+  - term: huhu
+    reason: low_information_social_reaction
+  - term: kk
+    reason: low_information_social_reaction

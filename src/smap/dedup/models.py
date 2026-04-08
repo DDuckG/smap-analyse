@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from pydantic import BaseModel, Field
+
 
 class DedupClusterRecord(BaseModel):
     dedup_cluster_id: str
@@ -10,6 +12,7 @@ class DedupClusterRecord(BaseModel):
     cluster_size: int
     similarity_proxy: float
     text_fingerprint: str | None = None
+
 
 class DedupAnalysisResult(BaseModel):
     mentions_updated: int = 0

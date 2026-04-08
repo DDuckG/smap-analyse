@@ -1,1 +1,2 @@
 """Structured insight card generation."""
+

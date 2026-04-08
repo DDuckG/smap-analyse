@@ -505,7 +505,7 @@ topics:
     description: Altcoin narratives, ecosystem rotation, and tokenomics chatter.
     knowledge_layer: domain
     topic_family: market_narrative
-    main_path_policy: generic_fallback
+    main_path_policy: core
     seed_phrases: ["altcoin", "rotation", "narrative", "tokenomics", "pump", "season"]
     related_entity_ids: ["brand.ethereum", "brand.solana", "concept.tokenomics"]
     related_aspect_ids: ["liquidity_depth"]

@@ -1,20 +1,26 @@
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import StrEnum
 from typing import Protocol, runtime_checkable
+
 from smap.core.types import utc_now
+
 ProviderMetadata = str | int | float | bool | None | list[str]
 
+
 class EmbeddingPurpose(StrEnum):
-    QUERY = 'query'
-    PASSAGE = 'passage'
-    CLUSTERING = 'clustering'
-    LINKING = 'linking'
+    QUERY = "query"
+    PASSAGE = "passage"
+    CLUSTERING = "clustering"
+    LINKING = "linking"
+
 
 class LanguageSource(StrEnum):
-    EXPLICIT = 'explicit'
-    INFERRED = 'inferred'
+    EXPLICIT = "explicit"
+    INFERRED = "inferred"
+
 
 @dataclass(frozen=True, slots=True)
 class ProviderProvenance:
@@ -27,12 +33,14 @@ class ProviderProvenance:
     generated_at: datetime = field(default_factory=utc_now)
     run_metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @dataclass(frozen=True, slots=True)
 class SimilarityMatch:
     candidate_id: str
     score: float
     candidate_text: str | None = None
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
+
 
 @dataclass(frozen=True, slots=True)
 class VectorItem:
@@ -41,6 +49,7 @@ class VectorItem:
     text: str
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @dataclass(frozen=True, slots=True)
 class VectorSearchHit:
     item_id: str
@@ -48,12 +57,14 @@ class VectorSearchHit:
     text: str
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 class VectorReuseState(StrEnum):
-    VALID = 'valid'
-    STALE = 'stale'
-    INCOMPATIBLE = 'incompatible'
-    MISSING = 'missing'
-    REFRESH_REQUIRED = 'refresh_required'
+    VALID = "valid"
+    STALE = "stale"
+    INCOMPATIBLE = "incompatible"
+    MISSING = "missing"
+    REFRESH_REQUIRED = "refresh_required"
+
 
 @dataclass(frozen=True, slots=True)
 class VectorNamespaceExpectation:
@@ -66,6 +77,7 @@ class VectorNamespaceExpectation:
     embedding_provider_version: str | None = None
     embedding_purpose: str | None = None
     corpus_hash: str | None = None
+
 
 @dataclass(frozen=True, slots=True)
 class VectorNamespaceInfo:
@@ -87,6 +99,7 @@ class VectorNamespaceInfo:
     recommended_action: str | None = None
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @dataclass(frozen=True, slots=True)
 class RecognizedEntitySpan:
     start: int
@@ -99,6 +112,7 @@ class RecognizedEntitySpan:
     provider_provenance: ProviderProvenance
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @dataclass(frozen=True, slots=True)
 class TopicDocument:
     document_id: str
@@ -109,6 +123,7 @@ class TopicDocument:
     segment_id: str | None = None
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @dataclass(frozen=True, slots=True)
 class TopicAssignment:
     document_id: str
@@ -117,6 +132,7 @@ class TopicAssignment:
     confidence: float
     representative: bool = False
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
+
 
 @dataclass(frozen=True, slots=True)
 class TopicArtifact:
@@ -131,10 +147,12 @@ class TopicArtifact:
     growth_delta: float | None = None
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @dataclass(frozen=True, slots=True)
 class TopicDiscoveryResult:
     assignments: list[TopicAssignment]
     artifacts: list[TopicArtifact]
+
 
 @dataclass(frozen=True, slots=True)
 class TaxonomyMappingCandidate:
@@ -144,6 +162,7 @@ class TaxonomyMappingCandidate:
     provider_provenance: ProviderProvenance
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @dataclass(frozen=True, slots=True)
 class LanguageIdentificationResult:
     language: str
@@ -152,92 +171,142 @@ class LanguageIdentificationResult:
     source: LanguageSource = LanguageSource.INFERRED
     metadata: dict[str, ProviderMetadata] = field(default_factory=dict)
 
+
 @runtime_checkable
 class EmbeddingProvider(Protocol):
     version: str
     provenance: ProviderProvenance
 
-    def embed_texts(self, texts, *, purpose=EmbeddingPurpose.PASSAGE):
-        ...
+    def embed_texts(
+        self,
+        texts: list[str],
+        *,
+        purpose: EmbeddingPurpose = EmbeddingPurpose.PASSAGE,
+    ) -> list[tuple[float, ...]]: ...
 
-    def rank_candidates(self, text, candidates, *, purpose=EmbeddingPurpose.LINKING, top_k=5):
-        ...
+    def rank_candidates(
+        self,
+        text: str,
+        candidates: dict[str, str],
+        *,
+        purpose: EmbeddingPurpose = EmbeddingPurpose.LINKING,
+        top_k: int = 5,
+    ) -> list[SimilarityMatch]: ...
 
-    def best_match(self, text, candidates):
-        ...
+    def best_match(self, text: str, candidates: dict[str, str]) -> SimilarityMatch | None: ...
+
+
 EmbeddingProviderV2 = EmbeddingProvider
+
 
 @runtime_checkable
 class VectorIndex(Protocol):
     version: str
     provenance: ProviderProvenance
 
-    def reset(self, *, namespace):
-        ...
+    def reset(self, *, namespace: str) -> None: ...
 
-    def bind_expectation(self, *, namespace, expected):
-        ...
+    def bind_expectation(
+        self,
+        *,
+        namespace: str,
+        expected: VectorNamespaceExpectation,
+    ) -> None: ...
 
-    def expectation_for(self, *, namespace):
-        ...
+    def expectation_for(self, *, namespace: str) -> VectorNamespaceExpectation | None: ...
 
-    def load(self, *, namespace, expected=None, allow_stale=False, force=False):
-        ...
+    def load(
+        self,
+        *,
+        namespace: str,
+        expected: VectorNamespaceExpectation | None = None,
+        allow_stale: bool = False,
+        force: bool = False,
+    ) -> bool: ...
 
-    def upsert(self, items, *, namespace):
-        ...
+    def upsert(self, items: list[VectorItem], *, namespace: str) -> None: ...
 
-    def info(self, *, namespace, expected=None):
-        ...
+    def info(
+        self,
+        *,
+        namespace: str,
+        expected: VectorNamespaceExpectation | None = None,
+    ) -> VectorNamespaceInfo | None: ...
 
-    def search(self, vector, *, namespace, top_k=5):
-        ...
+    def search(
+        self,
+        vector: tuple[float, ...],
+        *,
+        namespace: str,
+        top_k: int = 5,
+    ) -> list[VectorSearchHit]: ...
+
 
 @runtime_checkable
 class NERProvider(Protocol):
     version: str
     provenance: ProviderProvenance
 
-    def extract(self, text, *, mention_id, source_uap_id, label_inventory=None):
-        ...
+    def extract(
+        self,
+        text: str,
+        *,
+        mention_id: str,
+        source_uap_id: str,
+        label_inventory: list[str] | None = None,
+    ) -> list[RecognizedEntitySpan]: ...
+
 
 @runtime_checkable
 class TopicProvider(Protocol):
     version: str
     provenance: ProviderProvenance
 
-    def discover(self, documents, *, embeddings=None):
-        ...
+    def discover(
+        self,
+        documents: list[TopicDocument],
+        *,
+        embeddings: list[tuple[float, ...]] | None = None,
+    ) -> TopicDiscoveryResult: ...
+
 
 @runtime_checkable
 class TaxonomyMappingProvider(Protocol):
     version: str
     provenance: ProviderProvenance
 
-    def map_labels(self, labels, taxonomy_labels):
-        ...
+    def map_labels(self, labels: list[str], taxonomy_labels: list[str]) -> dict[str, str]: ...
 
-    def map_candidates(self, labels, taxonomy_labels, *, top_k=3):
-        ...
+    def map_candidates(
+        self,
+        labels: list[str],
+        taxonomy_labels: list[str],
+        *,
+        top_k: int = 3,
+    ) -> dict[str, list[TaxonomyMappingCandidate]]: ...
+
 
 @runtime_checkable
 class RerankerProvider(Protocol):
     version: str
     provenance: ProviderProvenance
 
-    def rerank(self, query, candidates):
-        ...
+    def rerank(
+        self,
+        query: str,
+        candidates: list[str],
+    ) -> list[SimilarityMatch]: ...
+
 
 class ZeroShotClassifierProvider(Protocol):
     version: str
 
-    def classify(self, text, labels):
-        ...
+    def classify(self, text: str, labels: list[str]) -> dict[str, float]: ...
+
 
 @runtime_checkable
 class LanguageIdProvider(Protocol):
     version: str
     provenance: ProviderProvenance
 
-    def detect(self, text):
-        ...
+    def detect(self, text: str) -> LanguageIdentificationResult: ...

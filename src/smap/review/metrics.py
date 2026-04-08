@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from pydantic import BaseModel
+
 
 class ReviewQueueSummary(BaseModel):
     raw_reviewable_items: int = 0
@@ -19,34 +21,34 @@ class ReviewQueueSummary(BaseModel):
     classification_suppressed_items: int = 0
 
     @property
-    def duplicate_compression_ratio(self):
+    def duplicate_compression_ratio(self) -> float:
         denominator = self.created_items if self.created_items else 1
         return round(self.raw_reviewable_items / denominator, 3)
 
     @property
-    def groupable_review_ratio(self):
+    def groupable_review_ratio(self) -> float:
         if self.raw_reviewable_items == 0:
             return 0.0
         return round(self.grouped_items / self.raw_reviewable_items, 3)
 
     @property
-    def group_coverage_ratio(self):
+    def group_coverage_ratio(self) -> float:
         if self.created_items == 0:
             return 0.0
         return round(self.grouped_items / self.created_items, 3)
 
     @property
-    def unresolved_to_review_conversion_ratio(self):
+    def unresolved_to_review_conversion_ratio(self) -> float:
         if self.unresolved_entity_candidates == 0:
             return 0.0
         return round(self.entity_created_items / self.unresolved_entity_candidates, 3)
 
     @property
-    def entity_review_items_per_unit(self):
+    def entity_review_items_per_unit(self) -> float:
         denominator = self.entity_created_items if self.entity_created_items else 1
         return round(self.entity_raw_reviewable_items / denominator, 3)
 
     @property
-    def classification_review_items_per_unit(self):
+    def classification_review_items_per_unit(self) -> float:
         denominator = self.classification_created_items if self.classification_created_items else 1
         return round(self.classification_raw_reviewable_items / denominator, 3)

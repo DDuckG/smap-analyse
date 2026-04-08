@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from smap.contracts.uap import Platform
 
@@ -67,7 +67,7 @@ class TopicDefinition(BaseModel):
     description: str | None = None
     knowledge_layer: KnowledgeLayerKind = "base"
     topic_family: str | None = None
-    main_path_policy: Literal["core", "generic_fallback", "domain_primary", "discovery_only"] = "core"
+    main_path_policy: Literal["core", "domain_primary", "discovery_only"] = "core"
     seed_phrases: list[str] = Field(default_factory=list)
     negative_phrases: list[str] = Field(default_factory=list)
     domain_tags: list[str] = Field(default_factory=list)
@@ -80,6 +80,13 @@ class TopicDefinition(BaseModel):
     related_issue_ids: list[str] = Field(default_factory=list)
     compatible_entity_types: list[str] = Field(default_factory=list)
     metadata: dict[str, OverlayProvenanceValue] = Field(default_factory=dict)
+
+    @field_validator("main_path_policy", mode="before")
+    @classmethod
+    def normalize_main_path_policy(cls, value: object) -> object:
+        if value == "generic_fallback":
+            return "core"
+        return value
 
 
 class EntitySeed(BaseModel):

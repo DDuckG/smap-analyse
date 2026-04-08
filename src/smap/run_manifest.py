@@ -16,7 +16,7 @@ from smap.ontology.runtime import OntologyRuntime, OntologyRuntimeStack
 from smap.providers.factory import ProviderRuntime
 from smap.runtime.doctor import RuntimeDoctorReport, run_runtime_doctor
 
-RUN_MANIFEST_VERSION = "2026.03.21-phobert-core-r1"
+RUN_MANIFEST_VERSION = "2026.04.08-onnx-cpu-r1"
 
 
 class InputBatchEntry(BaseModel):
@@ -34,8 +34,8 @@ class InputInspection(BaseModel):
 
 
 class RuntimeModeSummary(BaseModel):
-    requested_mode: Literal["default_intelligence", "degraded_fallback"]
-    effective_mode: Literal["default_intelligence", "degraded_fallback"]
+    requested_mode: Literal["onnx_cpu_intelligence"]
+    effective_mode: Literal["onnx_cpu_intelligence"]
     provider_modes: dict[str, str] = Field(default_factory=dict)
     provider_provenance: dict[str, dict[str, str | int | float | bool | None]] = Field(default_factory=dict)
     doctor: RuntimeDoctorReport | None = None
@@ -152,12 +152,11 @@ def summarize_runtime_mode(
     settings: Settings,
     enrichment: EnrichmentBundle,
     provider_runtime: ProviderRuntime | None = None,
-    doctor_report: RuntimeDoctorReport | None = None,
 ) -> RuntimeModeSummary:
     embedding_provider_name = (
         provider_runtime.embedding_provider.provenance.provider_name
         if provider_runtime is not None
-        else settings.intelligence.embeddings.provider_kind
+        else "phobert_embedding"
     )
     topic_provider_name = (
         provider_runtime.topic_provider.provenance.provider_name
@@ -168,90 +167,42 @@ def summarize_runtime_mode(
     language_provider_name = (
         language_provider.provenance.provider_name
         if language_provider is not None
-        else settings.intelligence.language_id.fallback_provider_kind
+        else settings.intelligence.language_id.provider_kind
     )
-    embedding_entity_enabled = (
-        provider_runtime is not None
-        and embedding_provider_name != "token_overlap"
-    )
+
     entity_mode = (
-        "ml_enabled"
-        if embedding_entity_enabled
+        "enabled"
+        if embedding_provider_name == "phobert_embedding"
         or any("phobert_ner" in method for fact in enrichment.entity_facts for method in fact.discovered_by)
         or any(
             fact.matched_by in {"embedding_similarity", "embedding_similarity_ranked"}
             for fact in enrichment.entity_facts
         )
-        else "degraded_fallback"
+        else "missing"
     )
-    semantic_mode = (
-        "ml_enabled"
-        if any(
-            component.name
-            in {
-                "semantic_assist_support",
-                "semantic_hypothesis_rerank",
-                "semantic_issue_rerank",
-                "semantic_corroboration_support",
-            }
-            for fact in enrichment.aspect_opinion_facts
-            for component in fact.score_components
-        )
-        or any(
-            component.name
-            in {
-                "semantic_assist_support",
-                "semantic_hypothesis_rerank",
-                "semantic_issue_rerank",
-                "semantic_corroboration_support",
-            }
-            for fact in enrichment.issue_signal_facts
-            for component in fact.score_components
-        )
-        else "degraded_fallback"
-    )
+    semantic_mode = "enabled" if embedding_provider_name == "phobert_embedding" else "missing"
     topic_mode = (
-        "ml_enabled"
+        "enabled"
         if topic_provider_name == "ontology_topic"
         or any((artifact.provider_name or "").casefold() == "ontology_topic" for artifact in enrichment.topic_artifacts)
-        else "degraded_fallback"
+        else "missing"
     )
-    language_mode = (
-        "ml_enabled"
-        if language_provider_name == "fasttext_lid"
-        else "degraded_fallback"
-    )
-    requested_mode: Literal["default_intelligence", "degraded_fallback"] = (
-        "default_intelligence"
-        if settings.intelligence.enable_optional_ml_providers
-        else "degraded_fallback"
-    )
-    effective_mode: Literal["default_intelligence", "degraded_fallback"] = (
-        "default_intelligence"
-        if requested_mode == "default_intelligence"
-        and any(mode == "ml_enabled" for mode in (entity_mode, semantic_mode, topic_mode, language_mode))
-        else "degraded_fallback"
-    )
-    warnings = []
-    if requested_mode == "default_intelligence":
-        degraded_components = [
-            name
-            for name, mode in {
-                "entity": entity_mode,
-                "semantic": semantic_mode,
-                "topic": topic_mode,
-                "language_id": language_mode,
-            }.items()
-            if mode == "degraded_fallback"
-        ]
-        if degraded_components:
-            warnings.append(
-                "Default intelligence was requested but some components degraded to fallback: "
-                + ", ".join(degraded_components)
-            )
+    language_mode = "enabled" if language_provider_name == "fasttext_lid" else "missing"
+
+    warnings = [
+        f"Runtime component `{name}` was not recorded as enabled."
+        for name, mode in {
+            "entity": entity_mode,
+            "semantic": semantic_mode,
+            "topic": topic_mode,
+            "language_id": language_mode,
+        }.items()
+        if mode != "enabled"
+    ]
+
     return RuntimeModeSummary(
-        requested_mode=requested_mode,
-        effective_mode=effective_mode,
+        requested_mode="onnx_cpu_intelligence",
+        effective_mode="onnx_cpu_intelligence",
         provider_modes={
             "entity": entity_mode,
             "semantic": semantic_mode,
@@ -268,7 +219,7 @@ def summarize_runtime_mode(
                 "provider_name": (
                     language_provider.provenance.provider_name
                     if language_provider is not None
-                    else settings.intelligence.language_id.fallback_provider_kind
+                    else settings.intelligence.language_id.provider_kind
                 ),
                 "provider_version": (
                     language_provider.provenance.provider_version
@@ -298,6 +249,11 @@ def summarize_runtime_mode(
                     if provider_runtime is not None
                     else settings.intelligence.embeddings.provider_kind
                 ),
+                "backend": (
+                    provider_runtime.embedding_provider.provenance.run_metadata.get("backend")
+                    if provider_runtime is not None
+                    else settings.intelligence.embeddings.runtime_backend
+                ),
             },
             "vector_index": {
                 "provider_kind": (
@@ -305,11 +261,10 @@ def summarize_runtime_mode(
                     if provider_runtime is not None
                     else settings.intelligence.vector_index.provider_kind
                 ),
-                "fallback_provider_kind": settings.intelligence.vector_index.fallback_provider_kind,
             },
             "ner": {
                 "provider_kind": settings.intelligence.ner.provider_kind,
-                "provider_name": "phobert_ner" if entity_mode == "ml_enabled" else "fallback_candidate_only",
+                "provider_name": "phobert_ner" if entity_mode == "enabled" else "missing",
                 "model_id": settings.intelligence.ner.model_id,
             },
             "topic": {
@@ -336,7 +291,7 @@ def summarize_runtime_mode(
                 "spam_enabled": settings.analytics.spam.enabled,
             },
         },
-        doctor=doctor_report if doctor_report is not None or provider_runtime is not None else run_runtime_doctor(settings),
+        doctor=run_runtime_doctor(settings),
         warnings=warnings,
     )
 

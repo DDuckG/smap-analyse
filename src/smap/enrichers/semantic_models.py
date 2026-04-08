@@ -1,32 +1,38 @@
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from enum import StrEnum
+
 from pydantic import BaseModel
 
+
 class AnchorType(StrEnum):
-    TARGET = 'target_anchor'
-    ASPECT = 'aspect_anchor'
-    ISSUE = 'issue_anchor'
-    POLARITY = 'polarity_cue_anchor'
-    NEGATION = 'negation_cue'
-    UNCERTAINTY = 'uncertainty_cue'
-    COMPARISON = 'comparison_cue'
-    CONTRAST = 'contrast_cue'
-    ESCALATION = 'escalation_cue'
-    HEARSAY = 'hearsay_cue'
+    TARGET = "target_anchor"
+    ASPECT = "aspect_anchor"
+    ISSUE = "issue_anchor"
+    POLARITY = "polarity_cue_anchor"
+    NEGATION = "negation_cue"
+    UNCERTAINTY = "uncertainty_cue"
+    COMPARISON = "comparison_cue"
+    CONTRAST = "contrast_cue"
+    ESCALATION = "escalation_cue"
+    HEARSAY = "hearsay_cue"
+
 
 class EvidenceMode(StrEnum):
-    DIRECT_COMPLAINT = 'direct_complaint'
-    DIRECT_OBSERVATION = 'direct_observation'
-    QUESTION_OR_UNCERTAINTY = 'question_or_uncertainty'
-    HEARSAY_OR_RUMOR = 'hearsay_or_rumor'
-    COMPARISON_BASED_CRITIQUE = 'comparison_based_critique'
-    ESCALATION_SIGNAL = 'escalation_signal'
+    DIRECT_COMPLAINT = "direct_complaint"
+    DIRECT_OBSERVATION = "direct_observation"
+    QUESTION_OR_UNCERTAINTY = "question_or_uncertainty"
+    HEARSAY_OR_RUMOR = "hearsay_or_rumor"
+    COMPARISON_BASED_CRITIQUE = "comparison_based_critique"
+    ESCALATION_SIGNAL = "escalation_signal"
+
 
 class EvidenceScope(StrEnum):
-    LOCAL = 'local'
-    INHERITED = 'inherited'
-    AMBIGUOUS = 'ambiguous'
+    LOCAL = "local"
+    INHERITED = "inherited"
+    AMBIGUOUS = "ambiguous"
+
 
 class EvidenceSpan(BaseModel):
     start: int
@@ -36,10 +42,12 @@ class EvidenceSpan(BaseModel):
     label: str | None = None
     segment_id: str | None = None
 
+
 class ScoreComponent(BaseModel):
     name: str
     value: float
     reason: str
+
 
 @dataclass(slots=True)
 class SemanticSegment:
@@ -51,6 +59,7 @@ class SemanticSegment:
     leading_boundary: str | None = None
     contrastive: bool = False
     question_like: bool = False
+
 
 @dataclass(slots=True)
 class SemanticAnchor:
@@ -66,8 +75,16 @@ class SemanticAnchor:
     polarity: float | None = None
     metadata: dict[str, str | bool | float | list[str]] = field(default_factory=dict)
 
-    def to_evidence_span(self):
-        return EvidenceSpan(start=self.start, end=self.end, text=self.text, anchor_type=self.anchor_type.value, label=self.label, segment_id=self.segment_id)
+    def to_evidence_span(self) -> EvidenceSpan:
+        return EvidenceSpan(
+            start=self.start,
+            end=self.end,
+            text=self.text,
+            anchor_type=self.anchor_type.value,
+            label=self.label,
+            segment_id=self.segment_id,
+        )
+
 
 @dataclass(slots=True)
 class TargetReference:
@@ -77,10 +94,11 @@ class TargetReference:
     entity_type: str | None
     concept_entity_id: str | None = None
     unresolved_cluster_id: str | None = None
-    target_kind: str = 'surface'
+    target_kind: str = "surface"
     grounding_confidence: float = 0.0
     inherited: bool = False
     inherited_from_mention_id: str | None = None
+
 
 @dataclass(slots=True)
 class MentionSentimentHypothesis:
@@ -92,8 +110,9 @@ class MentionSentimentHypothesis:
     score_components: list[ScoreComponent]
     uncertainty_flags: list[str]
     segment_ids: list[str]
-    semantic_routing: str = 'semantic_full'
+    semantic_routing: str = "semantic_full"
     corroboration_confidence: float | None = None
+
 
 @dataclass(slots=True)
 class TargetSentimentHypothesis:
@@ -107,9 +126,10 @@ class TargetSentimentHypothesis:
     score_components: list[ScoreComponent]
     uncertainty_flags: list[str]
     segment_ids: list[str]
-    semantic_routing: str = 'semantic_full'
+    semantic_routing: str = "semantic_full"
     target_grounding_confidence: float | None = None
     corroboration_confidence: float | None = None
+
 
 @dataclass(slots=True)
 class AspectOpinionHypothesis:
@@ -123,9 +143,10 @@ class AspectOpinionHypothesis:
     score_components: list[ScoreComponent]
     uncertainty_flags: list[str]
     segment_id: str
-    semantic_routing: str = 'semantic_full'
+    semantic_routing: str = "semantic_full"
     target_grounding_confidence: float | None = None
     corroboration_confidence: float | None = None
+
 
 @dataclass(slots=True)
 class IssueSignalHypothesis:
@@ -140,7 +161,16 @@ class IssueSignalHypothesis:
     score_components: list[ScoreComponent]
     uncertainty_flags: list[str]
     segment_id: str
-    semantic_routing: str = 'semantic_full'
+    semantic_routing: str = "semantic_full"
     target_grounding_confidence: float | None = None
     corroboration_confidence: float | None = None
     corroboration_count: int = 1
+
+
+@dataclass(slots=True)
+class SemanticHypothesisBatch:
+    mention_sentiments: list[MentionSentimentHypothesis] = field(default_factory=list)
+    target_sentiments: list[TargetSentimentHypothesis] = field(default_factory=list)
+    aspect_opinions: list[AspectOpinionHypothesis] = field(default_factory=list)
+    issue_signals: list[IssueSignalHypothesis] = field(default_factory=list)
+    runtime_stats: dict[str, object] = field(default_factory=dict)
